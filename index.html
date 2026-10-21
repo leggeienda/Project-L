@@ -657,14 +657,13 @@
         });
       }
     </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const SUPABASE_URL = 'https://hbmpqrgeggamwirsxqep.supabase.co';
-  const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhibXBxcmdlZ2dhbXdpcnN4cWVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDQ1MTIsImV4cCI6MjEwODE4MDUxMn0.8h1Y8umMhq3TKw-WnwPj3p4sUlQi7D6ilbX2t3dQ6xs
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhibXBxcmdlZ2dhbXdpcnN4cWVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDQ1MTIsImV4cCI6MjEwODE4MDUxMn0.8h1Y8umMhq3TKw-WnwPj3p4sUlQi7D6ilbX2t3dQ6xs';
   
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Funzione per caricare i commenti dal database
   async function loadComments() {
     const { data: comments, error } = await supabaseClient
       .from('comments')
@@ -679,6 +678,11 @@
     const container = document.getElementById('comments-list');
     if (!container) return;
 
+    if (comments.length === 0) {
+      container.innerHTML = '<p class="text-slate-400 text-sm">Nessun commento ancora. Sii il primo a scriverne uno!</p>';
+      return;
+    }
+
     container.innerHTML = comments.map(c => `
       <div class="p-4 bg-slate-800 rounded-lg mb-3 border border-slate-700">
         <div class="flex justify-between items-center mb-2">
@@ -690,7 +694,6 @@
     `).join('');
   }
 
-  // Funzione per inviare un nuovo commento
   async function sendComment(author, text) {
     if (!author || !text) return;
     
@@ -699,7 +702,7 @@
       .insert([{ author: author, text: text }]);
 
     if (error) {
-      alert('Errore durante l\'invio del commento: ' + error.message);
+      alert('Errore durante l\'invio: ' + error.message);
     } else {
       loadComments();
     }
