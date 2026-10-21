@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <head>
     <meta name="google-site-verification" content="B8TBWh20d2S3bgb6ckk7mtyM-6MK0HId_xny-On2Dys" />
     <meta charset="UTF-8" />
@@ -656,5 +657,61 @@
         });
       }
     </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://hbmpqrgeggamwirsxqep.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_gvJ3QA6DBZvy_d01Ad-yjG-JlPn-JlPn...'; // Inserisci la tua chiave completa presa dalla seconda foto
+  
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Funzione per caricare i commenti dal database
+  async function loadComments() {
+    const { data: comments, error } = await supabaseClient
+      .from('comments')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Errore nel caricamento:', error);
+      return;
+    }
+
+    const container = document.getElementById('comments-list');
+    if (!container) return;
+
+    container.innerHTML = comments.map(c => `
+      <div class="p-4 bg-slate-800 rounded-lg mb-3 border border-slate-700">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-bold text-cyan-400">${escapeHtml(c.author)}</span>
+          <span class="text-xs text-slate-400">${new Date(c.created_at).toLocaleDateString()}</span>
+        </div>
+        <p class="text-slate-200 text-sm">${escapeHtml(c.text)}</p>
+      </div>
+    `).join('');
+  }
+
+  // Funzione per inviare un nuovo commento
+  async function sendComment(author, text) {
+    if (!author || !text) return;
+    
+    const { error } = await supabaseClient
+      .from('comments')
+      .insert([{ author: author, text: text }]);
+
+    if (error) {
+      alert('Errore durante l\'invio del commento: ' + error.message);
+    } else {
+      loadComments();
+    }
+  }
+
+  function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', loadComments);
+</script>
   </body>
 </html>
