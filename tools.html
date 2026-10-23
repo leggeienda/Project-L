@@ -3,100 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Esplora i toolkit creati da NovaNest: tool gratis, utili e pensati per la community." />
+    <meta name="description" content="Esplora i toolkit di NovaNest: strumenti gratuiti e utili per studenti, creator e sviluppatori." />
     <title>Toolkit | NovaNest</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
+
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
     <header class="sticky top-0 z-50 border-b border-borderbg glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="./index.html" class="flex items-center space-x-3">
-          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500"><i data-lucide="code-2" class="w-6 h-6"></i></div>
+        <a href="./index.html" class="flex items-center space-x-3 cursor-pointer focus-ring group">
+          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow transition-transform duration-300 group-hover:scale-105">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+          </div>
           <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">NovaNest</span>
         </a>
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Navigazione principale">
           <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
           <a href="./about.html" class="text-gray-400 hover:text-brand-500 transition-colors">Chi siamo</a>
           <a href="./tools.html" class="text-brand-500 transition-colors">Toolkit</a>
           <a href="./community.html" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
         </nav>
-        <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">Proponi idea</a>
+
+        <div class="flex items-center">
+          <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
+            Proponi idea
+          </a>
+        </div>
       </div>
     </header>
 
     <main class="flex-grow page-shell">
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="reveal mb-10 text-center">
-          <p class="text-brand-500 uppercase tracking-[0.2em] text-sm font-semibold">Toolkit</p>
-          <h1 class="text-4xl md:text-5xl font-black text-white mt-4">Strumenti creati per risolvere problemi reali.</h1>
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div class="reveal text-center mb-10">
+          <div class="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
+            <span class="h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+            Toolkit
+          </div>
+          <h1 class="mt-6 text-4xl md:text-6xl font-black text-white leading-tight">Strumenti creati per risolvere problemi reali.</h1>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect flex flex-col justify-between">
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <article class="reveal soft-card rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <span class="px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">C++</span>
-              <h2 class="mt-4 text-xl font-bold text-white">Fast C++ File Batch Organizer</h2>
-              <p class="mt-3 text-sm text-gray-400">Ordina e classifica cartelle e file in modo semplice e veloce.</p>
+              <span class="inline-flex px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">C++</span>
+              <h2 class="mt-4 text-xl font-bold text-white">Fast File Organizer</h2>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">Ordina file, cartelle e documenti in modo facile e veloce senza frizioni.</p>
             </div>
-            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">Scarica eseguibile</button>
+            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">
+              Scarica eseguibile
+            </button>
           </article>
 
-          <article class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect flex flex-col justify-between">
+          <article class="reveal soft-card rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <span class="px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">Console</span>
-              <h2 class="mt-4 text-xl font-bold text-white">Student Grade & GPA Tracker</h2>
-              <p class="mt-3 text-sm text-gray-400">Calcola medie, voti e obiettivi per il percorso scolastico.</p>
+              <span class="inline-flex px-3 py-1 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-semibold">School</span>
+              <h2 class="mt-4 text-xl font-bold text-white">Student GPA Tracker</h2>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">Calcola voti, medie e obiettivi in modo semplice e utile per il percorso scolastico.</p>
             </div>
-            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">Codice sorgente</button>
+            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">
+              Apri strumento
+            </button>
           </article>
 
-          <article class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect flex flex-col justify-between">
+          <article class="reveal soft-card rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <span class="px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">Python</span>
-              <h2 class="mt-4 text-xl font-bold text-white">Discord Bot Auto-Notifier</h2>
-              <p class="mt-3 text-sm text-gray-400">Ricevi aggiornamenti automatici da feed e siti direttamente in chat.</p>
+              <span class="inline-flex px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">Web</span>
+              <h2 class="mt-4 text-xl font-bold text-white">Workflow Dashboard</h2>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">Un centro per task, idea, feedback e osservazioni da usare in modo più chiaro.</p>
             </div>
-            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">Ottieni script</button>
+            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">
+              Vedi demo
+            </button>
           </article>
 
-          <article class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect flex flex-col justify-between">
+          <article class="reveal soft-card rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <span class="px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">HTML / JS</span>
-              <h2 class="mt-4 text-xl font-bold text-white">Markdown Live Web Previewer</h2>
-              <p class="mt-3 text-sm text-gray-400">Scrivi markdown e guarda subito la preview in tempo reale.</p>
+              <span class="inline-flex px-3 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">Productivity</span>
+              <h2 class="mt-4 text-xl font-bold text-white">Focus Planner</h2>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">Organizza sessioni, priorità e momenti di lavoro per essere più produttivi senza stress.</p>
             </div>
-            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">Apri tool</button>
+            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">
+              Esplora
+            </button>
           </article>
 
-          <article class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect flex flex-col justify-between">
+          <article class="reveal soft-card rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <span class="px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">Automation</span>
-              <h2 class="mt-4 text-xl font-bold text-white">Task Runner Mini</h2>
-              <p class="mt-3 text-sm text-gray-400">Automatizza compiti ripetitivi con piccoli script per il tuo workflow.</p>
+              <span class="inline-flex px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">Utility</span>
+              <h2 class="mt-4 text-xl font-bold text-white">Smart Reminder Kit</h2>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">Set di promemoria e notifiche per gestire scadenze, appuntamenti e micro-obiettivi.</p>
             </div>
-            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">Prova demo</button>
+            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">
+              Preview
+            </button>
           </article>
 
-          <article class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect flex flex-col justify-between">
+          <article class="reveal soft-card rounded-2xl p-6 flex flex-col justify-between">
             <div>
-              <span class="px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">Web</span>
-              <h2 class="mt-4 text-xl font-bold text-white">Open Dashboard Kit</h2>
-              <p class="mt-3 text-sm text-gray-400">Template semplice per dashboard personali, tracker e strumenti da usare subito.</p>
+              <span class="inline-flex px-3 py-1 rounded-lg bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-semibold">Creator</span>
+              <h2 class="mt-4 text-xl font-bold text-white">Content Sprint Board</h2>
+              <p class="mt-3 text-sm text-gray-400 leading-relaxed">Pianifica contenuti, temi e idee in modo più semplice e visivo per il lavoro creativo.</p>
             </div>
-            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">Apri preview</button>
+            <button class="mt-6 px-3 py-2 rounded-xl bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors">
+              Discovery
+            </button>
           </article>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-borderbg bg-darkbg py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 space-y-4 md:space-y-0">
-        <div class="flex items-center space-x-2"><i data-lucide="code" class="w-4 h-4 text-brand-500"></i><span>NovaNest © 2026.</span></div>
-        <div class="flex space-x-6"><a href="./index.html" class="hover:text-gray-400 transition-colors">Home</a><a href="./about.html" class="hover:text-gray-400 transition-colors">Chi siamo</a><a href="./community.html" class="hover:text-gray-400 transition-colors">Community</a></div>
+    <footer class="border-t border-slate-800 bg-slate-950/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="code" class="w-4 h-4 text-brand-400"></i>
+          <span>NovaNest © 2026</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="./index.html" class="hover:text-brand-400 transition-colors">Home</a>
+          <a href="./about.html" class="hover:text-brand-400 transition-colors">Chi siamo</a>
+          <a href="./community.html" class="hover:text-brand-400 transition-colors">Community</a>
+        </div>
       </div>
     </footer>
 
-    <script src="./script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+          });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        if (window.lucide) lucide.createIcons();
+      });
+    </script>
   </body>
 </html>
