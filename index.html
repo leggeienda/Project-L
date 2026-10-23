@@ -3,13 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="B8TBWh20d2S3bgb6ckk7mtyM-6MK0HId_xny-On2Dys" />
-    <meta
-      name="description"
-      content="NovaNest è una community giovane e creativa di sviluppatori che crea strumenti open source, utility e progetti gratuiti."
-    />
+    <meta name="description" content="NovaNest è una community giovane e creativa di sviluppatori che crea strumenti, utility e progetti gratuiti." />
     <title>NovaNest — Build, Share, Learn</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -39,132 +34,30 @@
         },
       };
     </script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-      :root {
-        color-scheme: dark;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: 'Inter', sans-serif;
-        background:
-          radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 32%),
-          radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.12), transparent 24%),
-          #0a1020;
-        color: #ecf3ff;
-      }
-
-      .glass {
-        background: rgba(16, 27, 45, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
-
-      .glow-effect {
-        box-shadow: 0 0 24px -10px rgba(34, 211, 238, 0.22);
-        transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-      }
-
-      .glow-effect:hover {
-        box-shadow: 0 0 36px 0 rgba(34, 211, 238, 0.25);
-        transform: translateY(-2px);
-      }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
-      }
-
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .hero-orb {
-        filter: blur(90px);
-        opacity: 0.45;
-      }
-
-      .page-shell {
-        position: relative;
-      }
-
-      .page-shell::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-        background-size: 24px 24px;
-        mask-image: radial-gradient(circle at center, black, transparent 80%);
-        pointer-events: none;
-      }
-
-      .scrollbar-thin::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      .scrollbar-thin::-webkit-scrollbar-track {
-        background: #0a1020;
-      }
-
-      .scrollbar-thin::-webkit-scrollbar-thumb {
-        background: #22314d;
-        border-radius: 6px;
-      }
-
-      .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background: #2c3f60;
-      }
-
-      .category-btn.active {
-        background: rgba(34, 211, 238, 0.12);
-        color: #67e8f9;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
-
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
     <header class="sticky top-0 z-50 border-b border-borderbg glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <button class="flex items-center space-x-3 cursor-pointer focus-ring" type="button" aria-label="Vai all'inizio" onclick="scrollToSection('hero')">
+        <a href="./index.html" class="flex items-center space-x-3 cursor-pointer focus-ring">
           <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow">
             <i data-lucide="code-2" class="w-6 h-6"></i>
           </div>
           <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">
             NovaNest
           </span>
-        </button>
+        </a>
 
         <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Navigazione principale">
-          <a href="#about" class="text-gray-400 hover:text-brand-500 transition-colors">Missione</a>
-          <a href="#tools" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
-          <a href="#community" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
+          <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
+          <a href="./about.html" class="text-gray-400 hover:text-brand-500 transition-colors">Chi siamo</a>
+          <a href="./tools.html" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
+          <a href="./community.html" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
         </nav>
 
         <div class="flex items-center space-x-3">
-          <a href="#community" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
+          <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
             Proponi idea
           </a>
         </div>
@@ -187,16 +80,16 @@
             <span class="bg-gradient-to-r from-brand-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent">forti, liberi e creativi.</span>
           </h1>
 
-          <p id="about" class="reveal text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p class="reveal text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
             NovaNest è una community di giovani sviluppatori che crea utilità, script, tool e progetti open source per aiutare chiunque a imparare, creare e risolvere problemi senza barriere.
           </p>
 
           <div class="reveal flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#tools" class="focus-ring px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium flex items-center justify-center space-x-2 transition-all shadow-lg hover:shadow-brand-500/20">
+            <a href="./tools.html" class="focus-ring px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium flex items-center justify-center space-x-2 transition-all shadow-lg hover:shadow-brand-500/20">
               <span>Esplora i tool</span>
               <i data-lucide="arrow-down" class="w-4 h-4"></i>
             </a>
-            <a href="#community" class="focus-ring px-6 py-3 rounded-xl bg-cardbg hover:bg-gray-800 border border-borderbg text-gray-300 font-medium flex items-center justify-center space-x-2 transition-all">
+            <a href="./community.html" class="focus-ring px-6 py-3 rounded-xl bg-cardbg hover:bg-gray-800 border border-borderbg text-gray-300 font-medium flex items-center justify-center space-x-2 transition-all">
               <i data-lucide="message-square" class="w-4 h-4"></i>
               <span>Partecipa alla community</span>
             </a>
@@ -219,102 +112,30 @@
         </div>
       </section>
 
-      <section id="tools" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-borderbg">
-        <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10">
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Toolkit in mostra</h2>
-            <p class="text-gray-400 text-sm mt-1">Scopri e usa gli strumenti creati dalla nostra community.</p>
+      <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <div class="mb-4 inline-flex p-2 rounded-xl bg-brand-500/10 text-brand-500">
+              <i data-lucide="rocket" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Veloce</h3>
+            <p class="text-sm text-gray-400">Strumenti creati per risolvere problemi reali in modo semplice, chiaro e utile.</p>
           </div>
 
-          <div class="mt-6 md:mt-0 flex flex-col sm:flex-row gap-3">
-            <div class="relative">
-              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-              <input
-                type="text"
-                id="tool-search"
-                aria-label="Cerca tool"
-                placeholder="Cerca tool..."
-                class="w-full sm:w-64 pl-9 pr-4 py-2 bg-cardbg border border-borderbg rounded-lg text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500 transition-colors"
-              />
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <div class="mb-4 inline-flex p-2 rounded-xl bg-brand-500/10 text-brand-500">
+              <i data-lucide="users" class="w-5 h-5"></i>
             </div>
-
-            <div class="flex flex-wrap gap-1 bg-cardbg p-1 rounded-lg border border-borderbg text-xs" aria-label="Filtri categoria">
-              <button type="button" class="category-btn active px-3 py-1.5 rounded-md text-gray-300 hover:text-white transition-all" data-cat="all">Tutti</button>
-              <button type="button" class="category-btn px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition-all" data-cat="CLI">C++ / CLI</button>
-              <button type="button" class="category-btn px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition-all" data-cat="Automation">Python / Automation</button>
-              <button type="button" class="category-btn px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition-all" data-cat="Web">Web Apps</button>
-            </div>
-          </div>
-        </div>
-
-        <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      </section>
-
-      <section id="community" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div class="lg:col-span-1">
-            <div class="reveal sticky top-24 bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
-              <div class="flex items-center space-x-2 text-brand-500 mb-2">
-                <i data-lucide="lightbulb" class="w-5 h-5"></i>
-                <h3 class="font-bold text-white text-lg">Suggerisci un tool</h3>
-              </div>
-              <p class="text-xs text-gray-400 mb-6">Hai un'idea per un software, un utility o un miglioramento? Scrivilo qui e la community lo sviluppa insieme.</p>
-
-              <form id="comment-form" class="space-y-4" novalidate>
-                <div>
-                  <label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Nome / Username</label>
-                  <input
-                    type="text"
-                    id="author-input"
-                    name="author"
-                    required
-                    maxlength="40"
-                    placeholder="es. Alex"
-                    class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-
-                <div>
-                  <label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Tag / Categoria</label>
-                  <select id="tag-input" name="tag" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 focus:outline-none focus:border-brand-500">
-                    <option value="Feature Request">Feature Request</option>
-                    <option value="New Tool Idea">New Tool Idea</option>
-                    <option value="Bug Report">Bug Report</option>
-                    <option value="General Feedback">General Feedback</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">La tua idea o feedback</label>
-                  <textarea
-                    id="content-input"
-                    name="content"
-                    required
-                    rows="4"
-                    maxlength="500"
-                    placeholder="Spiega cosa vorresti costruire o migliorare..."
-                    class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-brand-500 resize-none"
-                  ></textarea>
-                </div>
-
-                <button type="submit" class="focus-ring w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-lg transition-colors flex items-center justify-center space-x-2">
-                  <i data-lucide="send" class="w-4 h-4"></i>
-                  <span>Pubblica idea</span>
-                </button>
-              </form>
-            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Community-first</h3>
+            <p class="text-sm text-gray-400">Ogni idea nasce dalla gente: dai feedback, dalle richieste e dalle esperienze reali.</p>
           </div>
 
-          <div class="lg:col-span-2">
-            <div class="reveal flex items-center justify-between mb-6">
-              <div class="flex items-center space-x-3">
-                <i data-lucide="message-square" class="w-6 h-6 text-brand-500"></i>
-                <h3 class="text-xl font-bold text-white">Idee & feedback della community</h3>
-              </div>
-              <span class="text-xs text-gray-500" id="comments-total-badge">0 Post</span>
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <div class="mb-4 inline-flex p-2 rounded-xl bg-brand-500/10 text-brand-500">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
             </div>
-
-            <div id="comments-container" class="space-y-4"></div>
+            <h3 class="text-xl font-bold text-white mb-2">Open & creativo</h3>
+            <p class="text-sm text-gray-400">Progetti pensati per essere condivisi, usati e migliorati insieme da tutti.</p>
           </div>
         </div>
       </section>
@@ -327,472 +148,18 @@
           <span>NovaNest © 2026. Creato con passione, curiosità e AI.</span>
         </div>
         <div class="flex space-x-6">
-          <a href="#hero" class="hover:text-gray-400 transition-colors">Torna su</a>
-          <a href="#tools" class="hover:text-gray-400 transition-colors">Tool</a>
-          <a href="#community" class="hover:text-gray-400 transition-colors">Community</a>
+          <a href="./index.html" class="hover:text-gray-400 transition-colors">Home</a>
+          <a href="./tools.html" class="hover:text-gray-400 transition-colors">Toolkit</a>
+          <a href="./community.html" class="hover:text-gray-400 transition-colors">Community</a>
         </div>
       </div>
     </footer>
 
-    <div
-      id="toast"
-      aria-live="polite"
-      class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none"
-    >
+    <div id="toast" aria-live="polite" class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
       <i data-lucide="check-circle" class="w-5 h-5"></i>
       <span id="toast-message" class="text-sm font-medium">Completato!</span>
     </div>
 
-    <script>
-      const SUPABASE_URL = 'https://hbmpqrgeggamwirsxqep.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhibXBxcmdlZ2dhbXdpcnN4cWVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDQ1MTIsImV4cCI6MjEwODE4MDUxMn0.8h1Y8uQm5IT28ur6po1QfMgsIHWFeNnkfjsQY58gA5w';
-      const supabaseClient = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
-      const defaultTools = [
-        {
-          id: 1,
-          title: 'Fast C++ File Batch Organizer',
-          category: 'CLI',
-          badge: 'C++',
-          description: 'Utility cli veloce per ordinare e categorizzare cartelle di download e file dispersi in pochi secondi.',
-          downloads: 142,
-          githubUrl: '#',
-          actionText: 'Scarica eseguibile',
-          icon: 'folder-archive',
-        },
-        {
-          id: 2,
-          title: 'Student Grade & GPA Tracker',
-          category: 'CLI',
-          badge: 'C++ / Console',
-          description: 'App da terminale per calcolare voti, media ponderata, obiettivi e tracciare i progressi scolastici.',
-          downloads: 89,
-          githubUrl: '#',
-          actionText: 'Codice sorgente',
-          icon: 'calculator',
-        },
-        {
-          id: 3,
-          title: 'Discord Bot Auto-Notifier',
-          category: 'Automation',
-          badge: 'Python',
-          description: 'Bot automatico che legge feed e website e avvisa i membri del team in canali Discord o chat.',
-          downloads: 215,
-          githubUrl: '#',
-          actionText: 'Ottieni script',
-          icon: 'bot',
-        },
-        {
-          id: 4,
-          title: 'Markdown Live Web Previewer',
-          category: 'Web',
-          badge: 'HTML / JS',
-          description: 'Tool web per scrivere markdown, vedere anteprima live e esportare documenti pronti all’uso.',
-          downloads: 304,
-          githubUrl: '#',
-          actionText: 'Apri tool',
-          icon: 'layout',
-        },
-      ];
-
-      const defaultComments = [
-        {
-          id: 101,
-          author: 'Marco',
-          tag: 'New Tool Idea',
-          content: 'Magari un software leggero per monitorare CPU e temperatura mentre gioco, con alert in tempo reale.',
-          upvotes: 12,
-          date: '2 giorni fa',
-          userVoted: false,
-        },
-        {
-          id: 102,
-          author: 'DevFriend_04',
-          tag: 'Feature Request',
-          content: 'Adoro il file organizer! Sarebbe perfetto avere anche una funzione per rimuovere cartelle vuote dopo il sorting.',
-          upvotes: 8,
-          date: 'Ieri',
-          userVoted: false,
-        },
-      ];
-
-      let currentFilter = 'all';
-      let searchQuery = '';
-      let comments = loadLocalComments();
-
-      function loadLocalComments() {
-        try {
-          const saved = localStorage.getItem('nova_nest_comments');
-          if (saved) {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed) && parsed.length) return parsed;
-          }
-        } catch (error) {
-          console.warn('Impossibile leggere commenti salvati localmente:', error);
-        }
-        return [...defaultComments];
-      }
-
-      function persistLocalComments() {
-        try {
-          localStorage.setItem('nova_nest_comments', JSON.stringify(comments));
-        } catch (error) {
-          console.warn('Impossibile salvare commenti localmente:', error);
-        }
-      }
-
-      function escapeHtml(str) {
-        if (str === null || str === undefined) return '';
-        return String(str).replace(/[&<>"']/g, (char) => {
-          const map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;',
-          };
-          return map[char] || char;
-        });
-      }
-
-      function formatDate(value) {
-        try {
-          return new Date(value).toLocaleDateString('it-IT', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric',
-          });
-        } catch {
-          return 'Recentemente';
-        }
-      }
-
-      async function loadComments() {
-        comments = loadLocalComments();
-        renderComments();
-
-        if (!supabaseClient) {
-          showToast('Supabase non disponibile: uso fallback locale.');
-          return;
-        }
-
-        try {
-          const { data, error } = await supabaseClient
-            .from('comments')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-          if (error) throw error;
-
-          if (Array.isArray(data) && data.length) {
-            comments = data.map((item) => ({
-              id: item.id || Date.now() + Math.random(),
-              author: item.author || 'Anonimo',
-              tag: item.tag || 'General Feedback',
-              content: item.text || item.content || '',
-              upvotes: Number(item.upvotes) || 0,
-              date: item.created_at ? formatDate(item.created_at) : 'Recentemente',
-              userVoted: false,
-            }));
-            persistLocalComments();
-          }
-        } catch (error) {
-          console.warn('Errore caricamento Supabase, fallback locale:', error);
-          comments = loadLocalComments();
-        }
-
-        renderComments();
-        updateStats();
-      }
-
-      async function sendCommentToServer(author, text, tag) {
-        if (!supabaseClient) return false;
-
-        try {
-          const { error } = await supabaseClient.from('comments').insert([
-            {
-              author,
-              text,
-              tag,
-            },
-          ]);
-
-          if (error) throw error;
-          return true;
-        } catch (error) {
-          console.warn('Errore invio Supabase:', error);
-          return false;
-        }
-      }
-
-      function renderTools() {
-        const container = document.getElementById('tools-grid');
-        if (!container) return;
-
-        container.innerHTML = '';
-
-        const filteredTools = defaultTools.filter((tool) => {
-          const matchesCategory = currentFilter === 'all' || tool.category === currentFilter;
-          const matchesSearch =
-            tool.title.toLowerCase().includes(searchQuery) ||
-            tool.description.toLowerCase().includes(searchQuery) ||
-            tool.badge.toLowerCase().includes(searchQuery);
-
-          return matchesCategory && matchesSearch;
-        });
-
-        if (filteredTools.length === 0) {
-          container.innerHTML = `
-            <div class="col-span-full py-12 text-center text-gray-500">
-              <i data-lucide="package-open" class="w-12 h-12 mx-auto mb-3 opacity-40"></i>
-              <p>Nessun tool trovato con i filtri attuali.</p>
-            </div>
-          `;
-          lucide.createIcons();
-          return;
-        }
-
-        filteredTools.forEach((tool) => {
-          const card = document.createElement('div');
-          card.className = 'bg-cardbg border border-borderbg rounded-2xl p-6 hover:border-brand-500/50 transition-all glow-effect flex flex-col justify-between';
-
-          card.innerHTML = `
-            <div>
-              <div class="flex items-center justify-between mb-4">
-                <span class="px-2.5 py-1 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">
-                  ${escapeHtml(tool.badge)}
-                </span>
-                <div class="p-2 bg-darkbg border border-borderbg rounded-lg text-gray-400">
-                  <i data-lucide="${tool.icon}" class="w-5 h-5"></i>
-                </div>
-              </div>
-              <h3 class="text-lg font-bold text-white mb-2">${escapeHtml(tool.title)}</h3>
-              <p class="text-xs text-gray-400 leading-relaxed mb-6">${escapeHtml(tool.description)}</p>
-            </div>
-            <div class="pt-4 border-t border-borderbg/60 flex items-center justify-between gap-3">
-              <span class="text-xs text-gray-500 flex items-center gap-1">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> ${tool.downloads} utilizzi
-              </span>
-              <button type="button" data-tool-id="${tool.id}" class="focus-ring px-3 py-1.5 rounded-lg bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors flex items-center gap-2">
-                <span>${escapeHtml(tool.actionText)}</span>
-                <i data-lucide="external-link" class="w-3 h-3"></i>
-              </button>
-            </div>
-          `;
-
-          const actionButton = card.querySelector('[data-tool-id]');
-          actionButton.addEventListener('click', () => handleDownload(tool));
-
-          container.appendChild(card);
-        });
-
-        lucide.createIcons();
-      }
-
-      function filterTools(category) {
-        currentFilter = category;
-
-        document.querySelectorAll('.category-btn').forEach((button) => {
-          const isActive = button.dataset.cat === category;
-          button.classList.toggle('active', isActive);
-          button.classList.toggle('bg-brand-500/20', isActive);
-          button.classList.toggle('text-brand-500', isActive);
-          button.classList.toggle('font-medium', isActive);
-          button.classList.toggle('text-gray-400', !isActive);
-          button.classList.toggle('text-gray-300', !isActive && button.dataset.cat === 'all');
-        });
-
-        renderTools();
-      }
-
-      function renderComments() {
-        const container = document.getElementById('comments-container');
-        const totalBadge = document.getElementById('comments-total-badge');
-
-        if (!container) return;
-
-        container.innerHTML = '';
-
-        if (comments.length === 0) {
-          container.innerHTML = `
-            <div class="py-12 text-center text-gray-500 bg-cardbg border border-borderbg rounded-2xl">
-              <i data-lucide="message-square-off" class="w-10 h-10 mx-auto mb-2 opacity-40"></i>
-              <p>Nessun commento ancora. Sii il primo a scriverne uno!</p>
-            </div>
-          `;
-          if (totalBadge) totalBadge.textContent = '0 Post';
-          lucide.createIcons();
-          return;
-        }
-
-        comments.forEach((comment) => {
-          const card = document.createElement('div');
-          card.className = 'bg-cardbg border border-borderbg rounded-xl p-5 transition-all hover:border-gray-700';
-
-          card.innerHTML = `
-            <div class="flex items-start justify-between gap-4">
-              <div class="flex-grow">
-                <div class="flex items-center flex-wrap gap-2 mb-2">
-                  <span class="font-bold text-sm text-white">${escapeHtml(comment.author)}</span>
-                  <span class="text-xs text-gray-600">•</span>
-                  <span class="text-xs text-gray-500">${escapeHtml(comment.date)}</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-300 border border-borderbg">
-                    ${escapeHtml(comment.tag || 'General Feedback')}
-                  </span>
-                </div>
-                <p class="text-sm text-gray-300 leading-relaxed">${escapeHtml(comment.content)}</p>
-              </div>
-
-              <button type="button" data-comment-id="${comment.id}" class="focus-ring flex flex-col items-center justify-center p-2 min-w-[48px] rounded-lg border ${comment.userVoted ? 'bg-brand-500/10 border-brand-500/30 text-brand-500' : 'bg-darkbg border-borderbg text-gray-400'}">
-                <i data-lucide="thumbs-up" class="w-4 h-4 mb-1"></i>
-                <span class="text-xs font-bold">${Number(comment.upvotes) || 0}</span>
-              </button>
-            </div>
-          `;
-
-          const upvoteButton = card.querySelector('[data-comment-id]');
-          upvoteButton.addEventListener('click', () => toggleUpvote(comment.id));
-
-          container.appendChild(card);
-        });
-
-        if (totalBadge) totalBadge.textContent = `${comments.length} ${comments.length === 1 ? 'Post' : 'Post'}`;
-        lucide.createIcons();
-      }
-
-      async function handleCommentSubmit(event) {
-        event.preventDefault();
-
-        const author = document.getElementById('author-input')?.value.trim();
-        const tag = document.getElementById('tag-input')?.value || 'General Feedback';
-        const content = document.getElementById('content-input')?.value.trim();
-
-        if (!author || !content) {
-          showToast('Completa nome e messaggio prima di inviare.');
-          return;
-        }
-
-        const newComment = {
-          id: Date.now(),
-          author,
-          tag,
-          content,
-          upvotes: 1,
-          date: 'Adesso',
-          userVoted: true,
-        };
-
-        comments = [newComment, ...comments];
-        persistLocalComments();
-        renderComments();
-        updateStats();
-
-        const serverSaved = await sendCommentToServer(author, content, tag);
-        if (serverSaved) {
-          showToast('Idea inviata al server con successo!');
-        } else {
-          showToast('Idea salvata localmente. Server non disponibile.');
-        }
-
-        const form = document.getElementById('comment-form');
-        if (form) form.reset();
-      }
-
-      function toggleUpvote(id) {
-        comments = comments.map((comment) => {
-          if (comment.id !== id) return comment;
-
-          const nextUpvotes = comment.userVoted ? (Number(comment.upvotes) || 0) - 1 : (Number(comment.upvotes) || 0) + 1;
-          return {
-            ...comment,
-            upvotes: Math.max(0, nextUpvotes),
-            userVoted: !comment.userVoted,
-          };
-        });
-
-        persistLocalComments();
-        renderComments();
-      }
-
-      function updateStats() {
-        const toolCount = document.getElementById('stat-tools-count');
-        const commentCount = document.getElementById('stat-comments-count');
-
-        if (toolCount) toolCount.textContent = String(defaultTools.length);
-        if (commentCount) commentCount.textContent = String(comments.length);
-      }
-
-      function handleDownload(tool) {
-        if (tool && tool.githubUrl && tool.githubUrl !== '#') {
-          window.open(tool.githubUrl, '_blank', 'noopener,noreferrer');
-          showToast(`Apertura ${tool.title}...`);
-          return;
-        }
-
-        showToast(`Preparazione ${tool.title}...`);
-      }
-
-      function showToast(message) {
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toast-message');
-
-        if (!toast || !toastMessage) return;
-
-        toastMessage.textContent = message;
-        toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-
-        setTimeout(() => {
-          toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-        }, 3000);
-      }
-
-      function scrollToSection(id) {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const searchInput = document.getElementById('tool-search');
-        const commentForm = document.getElementById('comment-form');
-
-        if (searchInput) {
-          searchInput.addEventListener('input', (event) => {
-            searchQuery = event.target.value.trim().toLowerCase();
-            renderTools();
-          });
-        }
-
-        if (commentForm) {
-          commentForm.addEventListener('submit', handleCommentSubmit);
-        }
-
-        document.querySelectorAll('.category-btn').forEach((button) => {
-          button.addEventListener('click', () => {
-            filterTools(button.dataset.cat || 'all');
-          });
-        });
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-              }
-            });
-          },
-          { threshold: 0.15 }
-        );
-
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-        renderTools();
-        renderComments();
-        updateStats();
-        loadComments();
-        lucide.createIcons();
-      });
-    </script>
+    <script src="./script.js"></script>
   </body>
 </html>
