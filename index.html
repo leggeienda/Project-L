@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<html lang="it" class="dark">
   <head>
-    <meta name="google-site-verification" content="B8TBWh20d2S3bgb6ckk7mtyM-6MK0HId_xny-On2Dys" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="B8TBWh20d2S3bgb6ckk7mtyM-6MK0HId_xny-On2Dys" />
     <meta
       name="description"
-      content="DevCollective is a free community-driven software hub for open tools, utilities, and developer resources."
+      content="NovaNest è una community giovane e creativa di sviluppatori che crea strumenti open source, utility e progetti gratuiti."
     />
-    <title>DevCollective - Community & Software Hub</title>
+    <title>NovaNest — Build, Share, Learn</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,15 +18,22 @@
           extend: {
             colors: {
               brand: {
-                50: '#f0f9ff',
-                500: '#06b6d4',
+                50: '#eefbff',
+                100: '#d9f7ff',
+                400: '#5eead4',
+                500: '#22d3ee',
                 600: '#0891b2',
-                700: '#0e7490',
-                900: '#164e63',
+                700: '#0f766e',
+                900: '#123b4a',
               },
-              darkbg: '#0b0f17',
-              cardbg: '#111827',
-              borderbg: '#1f2937',
+              darkbg: '#0a1020',
+              panel: '#101b2d',
+              cardbg: '#121f33',
+              borderbg: '#22314d',
+              accent: '#7c3aed',
+            },
+            boxShadow: {
+              glow: '0 0 32px rgba(34, 211, 238, 0.25)',
             },
           },
         },
@@ -35,6 +41,7 @@
     </script>
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -49,29 +56,57 @@
 
       body {
         font-family: 'Inter', sans-serif;
-        background-color: #0b0f17;
-        color: #f3f4f6;
+        background:
+          radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 32%),
+          radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.12), transparent 24%),
+          #0a1020;
+        color: #ecf3ff;
+      }
+
+      .glass {
+        background: rgba(16, 27, 45, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
 
       .glow-effect {
-        box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.15);
-        transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        box-shadow: 0 0 24px -10px rgba(34, 211, 238, 0.22);
+        transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
       }
 
       .glow-effect:hover {
-        box-shadow: 0 0 30px 0px rgba(6, 182, 212, 0.3);
-        transform: translateY(-1px);
+        box-shadow: 0 0 36px 0 rgba(34, 211, 238, 0.25);
+        transform: translateY(-2px);
       }
 
-      .focus-ring:focus-visible,
-      .category-btn:focus-visible,
-      button:focus-visible,
-      input:focus-visible,
-      textarea:focus-visible,
-      select:focus-visible,
-      a:focus-visible {
-        outline: 2px solid rgba(6, 182, 212, 0.9);
-        outline-offset: 2px;
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-orb {
+        filter: blur(90px);
+        opacity: 0.45;
+      }
+
+      .page-shell {
+        position: relative;
+      }
+
+      .page-shell::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 24px 24px;
+        mask-image: radial-gradient(circle at center, black, transparent 80%);
+        pointer-events: none;
       }
 
       .scrollbar-thin::-webkit-scrollbar {
@@ -79,16 +114,21 @@
       }
 
       .scrollbar-thin::-webkit-scrollbar-track {
-        background: #0b0f17;
+        background: #0a1020;
       }
 
       .scrollbar-thin::-webkit-scrollbar-thumb {
-        background: #1f2937;
-        border-radius: 4px;
+        background: #22314d;
+        border-radius: 6px;
       }
 
       .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background: #374151;
+        background: #2c3f60;
+      }
+
+      .category-btn.active {
+        background: rgba(34, 211, 238, 0.12);
+        color: #67e8f9;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -105,85 +145,85 @@
     </style>
   </head>
 
-  <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkbg/80 border-b border-borderbg">
+  <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
+    <header class="sticky top-0 z-50 border-b border-borderbg glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <button class="flex items-center space-x-3 cursor-pointer focus-ring" type="button" aria-label="Go to top" onclick="scrollToSection('hero')">
-          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-lg text-brand-500">
+        <button class="flex items-center space-x-3 cursor-pointer focus-ring" type="button" aria-label="Vai all'inizio" onclick="scrollToSection('hero')">
+          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow">
             <i data-lucide="code-2" class="w-6 h-6"></i>
           </div>
-          <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-white via-gray-200 to-brand-500 bg-clip-text text-transparent">
-            DevCollective
+          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">
+            NovaNest
           </span>
         </button>
 
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Main navigation">
-          <a href="#about" class="text-gray-400 hover:text-brand-500 transition-colors">Mission</a>
-          <a href="#tools" class="text-gray-400 hover:text-brand-500 transition-colors">Tools & Apps</a>
-          <a href="#community" class="text-gray-400 hover:text-brand-500 transition-colors">Community Hub</a>
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Navigazione principale">
+          <a href="#about" class="text-gray-400 hover:text-brand-500 transition-colors">Missione</a>
+          <a href="#tools" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
+          <a href="#community" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
         </nav>
 
         <div class="flex items-center space-x-3">
-          <a href="#community" class="focus-ring px-4 py-2 text-xs font-semibold rounded-lg bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-md hover:shadow-brand-500/20">
-            Request a Feature
+          <a href="#community" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
+            Proponi idea
           </a>
         </div>
       </div>
     </header>
 
-    <main class="flex-grow">
-      <section id="hero" class="relative py-20 md:py-32 overflow-hidden border-b border-borderbg">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <main class="flex-grow page-shell">
+      <section id="hero" class="relative py-20 md:py-28 overflow-hidden border-b border-borderbg">
+        <div class="hero-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[360px] bg-brand-500/20 rounded-full pointer-events-none"></div>
+        <div class="hero-orb absolute top-16 right-10 w-[300px] h-[300px] bg-violet-500/10 rounded-full pointer-events-none"></div>
 
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold mb-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div class="reveal inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold mb-6">
             <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-            <span>100% Free & Community Driven</span>
+            <span>100% Gratis · Community giovane</span>
           </div>
 
-          <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
-            Building Powerful Tools <br class="hidden sm:inline" />
-            <span class="bg-gradient-to-r from-brand-500 to-teal-400 bg-clip-text text-transparent">For Everyone, Completely Free.</span>
+          <h1 class="reveal text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-none">
+            Costruiamo strumenti <br class="hidden sm:inline" />
+            <span class="bg-gradient-to-r from-brand-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent">forti, liberi e creativi.</span>
           </h1>
 
-          <p id="about" class="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            We are an open collective of young passionate developers building free utilities, scripts, and software.
-            No paywalls, no hidden subscriptions. Tell us what you need, and we’ll build it.
+          <p id="about" class="reveal text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            NovaNest è una community di giovani sviluppatori che crea utilità, script, tool e progetti open source per aiutare chiunque a imparare, creare e risolvere problemi senza barriere.
           </p>
 
-          <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <div class="reveal flex flex-col sm:flex-row justify-center gap-4">
             <a href="#tools" class="focus-ring px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium flex items-center justify-center space-x-2 transition-all shadow-lg hover:shadow-brand-500/20">
-              <span>Explore Our Tools</span>
+              <span>Esplora i tool</span>
               <i data-lucide="arrow-down" class="w-4 h-4"></i>
             </a>
-            <a href="#community" class="focus-ring px-6 py-3 rounded-xl bg-cardbg hover:bg-gray-800 border border-borderbg text-gray-300 font-medium flex items-center justify-center space-x-2 transition-colors">
+            <a href="#community" class="focus-ring px-6 py-3 rounded-xl bg-cardbg hover:bg-gray-800 border border-borderbg text-gray-300 font-medium flex items-center justify-center space-x-2 transition-all">
               <i data-lucide="message-square" class="w-4 h-4"></i>
-              <span>Join Discussion</span>
+              <span>Partecipa alla community</span>
             </a>
           </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-16 pt-10 border-t border-borderbg/60 text-center">
+          <div class="reveal grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-16 pt-10 border-t border-borderbg/60 text-center">
             <div>
-              <div class="text-2xl font-bold text-white">100%</div>
-              <div class="text-xs text-gray-500 mt-1">Free & Open Source</div>
+              <div class="text-3xl font-black text-white">100%</div>
+              <div class="text-xs text-gray-500 mt-1">Open & Gratis</div>
             </div>
             <div>
-              <div class="text-2xl font-bold text-white" id="stat-tools-count">0</div>
-              <div class="text-xs text-gray-500 mt-1">Available Utilities</div>
+              <div class="text-3xl font-black text-white" id="stat-tools-count">0</div>
+              <div class="text-xs text-gray-500 mt-1">Tool disponibili</div>
             </div>
             <div class="col-span-2 md:col-span-1">
-              <div class="text-2xl font-bold text-white" id="stat-comments-count">0</div>
-              <div class="text-xs text-gray-500 mt-1">Community Suggestions</div>
+              <div class="text-3xl font-black text-white" id="stat-comments-count">0</div>
+              <div class="text-xs text-gray-500 mt-1">Idee della community</div>
             </div>
           </div>
         </div>
       </section>
 
       <section id="tools" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-borderbg">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10">
           <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Software Showcase</h2>
-            <p class="text-gray-400 text-sm mt-1">Browse and download tools created by our group.</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Toolkit in mostra</h2>
+            <p class="text-gray-400 text-sm mt-1">Scopri e usa gli strumenti creati dalla nostra community.</p>
           </div>
 
           <div class="mt-6 md:mt-0 flex flex-col sm:flex-row gap-3">
@@ -192,14 +232,14 @@
               <input
                 type="text"
                 id="tool-search"
-                aria-label="Search tools"
-                placeholder="Search tools..."
+                aria-label="Cerca tool"
+                placeholder="Cerca tool..."
                 class="w-full sm:w-64 pl-9 pr-4 py-2 bg-cardbg border border-borderbg rounded-lg text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500 transition-colors"
               />
             </div>
 
-            <div class="flex flex-wrap gap-1 bg-cardbg p-1 rounded-lg border border-borderbg text-xs" aria-label="Tool category filters">
-              <button type="button" class="category-btn active px-3 py-1.5 rounded-md text-gray-300 hover:text-white bg-brand-500/20 text-brand-500 font-medium transition-all" data-cat="all">All</button>
+            <div class="flex flex-wrap gap-1 bg-cardbg p-1 rounded-lg border border-borderbg text-xs" aria-label="Filtri categoria">
+              <button type="button" class="category-btn active px-3 py-1.5 rounded-md text-gray-300 hover:text-white transition-all" data-cat="all">Tutti</button>
               <button type="button" class="category-btn px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition-all" data-cat="CLI">C++ / CLI</button>
               <button type="button" class="category-btn px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition-all" data-cat="Automation">Python / Automation</button>
               <button type="button" class="category-btn px-3 py-1.5 rounded-md text-gray-400 hover:text-white transition-all" data-cat="Web">Web Apps</button>
@@ -213,29 +253,29 @@
       <section id="community" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div class="lg:col-span-1">
-            <div class="sticky top-24 bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <div class="reveal sticky top-24 bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
               <div class="flex items-center space-x-2 text-brand-500 mb-2">
                 <i data-lucide="lightbulb" class="w-5 h-5"></i>
-                <h3 class="font-bold text-white text-lg">Suggest a Tool</h3>
+                <h3 class="font-bold text-white text-lg">Suggerisci un tool</h3>
               </div>
-              <p class="text-xs text-gray-400 mb-6">Need a custom software or utility? Describe what you need and our community team will work on it.</p>
+              <p class="text-xs text-gray-400 mb-6">Hai un'idea per un software, un utility o un miglioramento? Scrivilo qui e la community lo sviluppa insieme.</p>
 
               <form id="comment-form" class="space-y-4" novalidate>
                 <div>
-                  <label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Your Name / Username</label>
+                  <label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Nome / Username</label>
                   <input
                     type="text"
                     id="author-input"
                     name="author"
                     required
                     maxlength="40"
-                    placeholder="e.g. Alex"
+                    placeholder="es. Alex"
                     class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-brand-500"
                   />
                 </div>
 
                 <div>
-                  <label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Tag / Category</label>
+                  <label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Tag / Categoria</label>
                   <select id="tag-input" name="tag" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 focus:outline-none focus:border-brand-500">
                     <option value="Feature Request">Feature Request</option>
                     <option value="New Tool Idea">New Tool Idea</option>
@@ -245,33 +285,33 @@
                 </div>
 
                 <div>
-                  <label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">Your Idea or Comment</label>
+                  <label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">La tua idea o feedback</label>
                   <textarea
                     id="content-input"
                     name="content"
                     required
                     rows="4"
                     maxlength="500"
-                    placeholder="Explain what software or feature you would like us to create..."
+                    placeholder="Spiega cosa vorresti costruire o migliorare..."
                     class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-brand-500 resize-none"
                   ></textarea>
                 </div>
 
                 <button type="submit" class="focus-ring w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-lg transition-colors flex items-center justify-center space-x-2">
                   <i data-lucide="send" class="w-4 h-4"></i>
-                  <span>Post Suggestion</span>
+                  <span>Pubblica idea</span>
                 </button>
               </form>
             </div>
           </div>
 
           <div class="lg:col-span-2">
-            <div class="flex items-center justify-between mb-6">
+            <div class="reveal flex items-center justify-between mb-6">
               <div class="flex items-center space-x-3">
                 <i data-lucide="message-square" class="w-6 h-6 text-brand-500"></i>
-                <h3 class="text-xl font-bold text-white">Community Ideas & Feedback</h3>
+                <h3 class="text-xl font-bold text-white">Idee & feedback della community</h3>
               </div>
-              <span class="text-xs text-gray-500" id="comments-total-badge">0 Posts</span>
+              <span class="text-xs text-gray-500" id="comments-total-badge">0 Post</span>
             </div>
 
             <div id="comments-container" class="space-y-4"></div>
@@ -284,11 +324,11 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 space-y-4 md:space-y-0">
         <div class="flex items-center space-x-2">
           <i data-lucide="code" class="w-4 h-4 text-brand-500"></i>
-          <span>DevCollective Initiative &copy; 2026. Built with passion and AI assistance.</span>
+          <span>NovaNest © 2026. Creato con passione, curiosità e AI.</span>
         </div>
         <div class="flex space-x-6">
-          <a href="#hero" class="hover:text-gray-400 transition-colors">Back to Top</a>
-          <a href="#tools" class="hover:text-gray-400 transition-colors">Software</a>
+          <a href="#hero" class="hover:text-gray-400 transition-colors">Torna su</a>
+          <a href="#tools" class="hover:text-gray-400 transition-colors">Tool</a>
           <a href="#community" class="hover:text-gray-400 transition-colors">Community</a>
         </div>
       </div>
@@ -300,20 +340,24 @@
       class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none"
     >
       <i data-lucide="check-circle" class="w-5 h-5"></i>
-      <span id="toast-message" class="text-sm font-medium">Action completed successfully!</span>
+      <span id="toast-message" class="text-sm font-medium">Completato!</span>
     </div>
 
     <script>
+      const SUPABASE_URL = 'https://hbmpqrgeggamwirsxqep.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhibXBxcmdlZ2dhbXdpcnN4cWVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDQ1MTIsImV4cCI6MjEwODE4MDUxMn0.8h1Y8uQm5IT28ur6po1QfMgsIHWFeNnkfjsQY58gA5w';
+      const supabaseClient = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
       const defaultTools = [
         {
           id: 1,
           title: 'Fast C++ File Batch Organizer',
           category: 'CLI',
           badge: 'C++',
-          description: 'Lightweight command-line utility that rapidly scans, sorts, and organizes chaotic download folders into clean categories.',
+          description: 'Utility cli veloce per ordinare e categorizzare cartelle di download e file dispersi in pochi secondi.',
           downloads: 142,
           githubUrl: '#',
-          actionText: 'Download Executable',
+          actionText: 'Scarica eseguibile',
           icon: 'folder-archive',
         },
         {
@@ -321,10 +365,10 @@
           title: 'Student Grade & GPA Tracker',
           category: 'CLI',
           badge: 'C++ / Console',
-          description: 'Simple console app to compute weighted grade averages, calculate targets needed for upcoming exams, and store logs.',
+          description: 'App da terminale per calcolare voti, media ponderata, obiettivi e tracciare i progressi scolastici.',
           downloads: 89,
           githubUrl: '#',
-          actionText: 'Source Code',
+          actionText: 'Codice sorgente',
           icon: 'calculator',
         },
         {
@@ -332,10 +376,10 @@
           title: 'Discord Bot Auto-Notifier',
           category: 'Automation',
           badge: 'Python',
-          description: 'Automated bot script that fetches updates from websites or RSS feeds and sends alerts directly to your team channel.',
+          description: 'Bot automatico che legge feed e website e avvisa i membri del team in canali Discord o chat.',
           downloads: 215,
           githubUrl: '#',
-          actionText: 'Get Script',
+          actionText: 'Ottieni script',
           icon: 'bot',
         },
         {
@@ -343,10 +387,10 @@
           title: 'Markdown Live Web Previewer',
           category: 'Web',
           badge: 'HTML / JS',
-          description: 'Single-page tool to compose Markdown documentation with instant side-by-side formatted preview and export options.',
+          description: 'Tool web per scrivere markdown, vedere anteprima live e esportare documenti pronti all’uso.',
           downloads: 304,
           githubUrl: '#',
-          actionText: 'Launch Tool',
+          actionText: 'Apri tool',
           icon: 'layout',
         },
       ];
@@ -356,70 +400,130 @@
           id: 101,
           author: 'Marco',
           tag: 'New Tool Idea',
-          content: 'Could you guys build a lightweight Windows software in C++ that can monitor CPU usage and alert if it gets too high while gaming?',
+          content: 'Magari un software leggero per monitorare CPU e temperatura mentre gioco, con alert in tempo reale.',
           upvotes: 12,
-          date: '2 days ago',
+          date: '2 giorni fa',
           userVoted: false,
         },
         {
           id: 102,
           author: 'DevFriend_04',
           tag: 'Feature Request',
-          content: 'Loving the C++ File Organizer! Could you add a feature to automatically delete empty folders after sorting?',
+          content: 'Adoro il file organizer! Sarebbe perfetto avere anche una funzione per rimuovere cartelle vuote dopo il sorting.',
           upvotes: 8,
-          date: 'Yesterday',
+          date: 'Ieri',
           userVoted: false,
         },
       ];
 
       let currentFilter = 'all';
       let searchQuery = '';
-      let comments = loadComments();
+      let comments = loadLocalComments();
 
-      function loadComments() {
+      function loadLocalComments() {
         try {
-          const saved = localStorage.getItem('dev_hub_comments');
-          return saved ? JSON.parse(saved) : defaultComments;
+          const saved = localStorage.getItem('nova_nest_comments');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length) return parsed;
+          }
         } catch (error) {
-          console.warn('Unable to load saved comments:', error);
-          return defaultComments;
+          console.warn('Impossibile leggere commenti salvati localmente:', error);
+        }
+        return [...defaultComments];
+      }
+
+      function persistLocalComments() {
+        try {
+          localStorage.setItem('nova_nest_comments', JSON.stringify(comments));
+        } catch (error) {
+          console.warn('Impossibile salvare commenti localmente:', error);
         }
       }
 
-      function persistComments() {
-        try {
-          localStorage.setItem('dev_hub_comments', JSON.stringify(comments));
-        } catch (error) {
-          console.warn('Unable to persist comments:', error);
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const searchInput = document.getElementById('tool-search');
-        const commentForm = document.getElementById('comment-form');
-
-        if (searchInput) {
-          searchInput.addEventListener('input', (event) => {
-            searchQuery = event.target.value.trim().toLowerCase();
-            renderTools();
-          });
-        }
-
-        if (commentForm) {
-          commentForm.addEventListener('submit', handleCommentSubmit);
-        }
-
-        document.querySelectorAll('.category-btn').forEach((button) => {
-          button.addEventListener('click', () => {
-            filterTools(button.dataset.cat || 'all');
-          });
+      function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str).replace(/[&<>"']/g, (char) => {
+          const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;',
+          };
+          return map[char] || char;
         });
+      }
 
-        renderTools();
+      function formatDate(value) {
+        try {
+          return new Date(value).toLocaleDateString('it-IT', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+          });
+        } catch {
+          return 'Recentemente';
+        }
+      }
+
+      async function loadComments() {
+        comments = loadLocalComments();
+        renderComments();
+
+        if (!supabaseClient) {
+          showToast('Supabase non disponibile: uso fallback locale.');
+          return;
+        }
+
+        try {
+          const { data, error } = await supabaseClient
+            .from('comments')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+          if (error) throw error;
+
+          if (Array.isArray(data) && data.length) {
+            comments = data.map((item) => ({
+              id: item.id || Date.now() + Math.random(),
+              author: item.author || 'Anonimo',
+              tag: item.tag || 'General Feedback',
+              content: item.text || item.content || '',
+              upvotes: Number(item.upvotes) || 0,
+              date: item.created_at ? formatDate(item.created_at) : 'Recentemente',
+              userVoted: false,
+            }));
+            persistLocalComments();
+          }
+        } catch (error) {
+          console.warn('Errore caricamento Supabase, fallback locale:', error);
+          comments = loadLocalComments();
+        }
+
         renderComments();
         updateStats();
-        lucide.createIcons();
-      });
+      }
+
+      async function sendCommentToServer(author, text, tag) {
+        if (!supabaseClient) return false;
+
+        try {
+          const { error } = await supabaseClient.from('comments').insert([
+            {
+              author,
+              text,
+              tag,
+            },
+          ]);
+
+          if (error) throw error;
+          return true;
+        } catch (error) {
+          console.warn('Errore invio Supabase:', error);
+          return false;
+        }
+      }
 
       function renderTools() {
         const container = document.getElementById('tools-grid');
@@ -441,7 +545,7 @@
           container.innerHTML = `
             <div class="col-span-full py-12 text-center text-gray-500">
               <i data-lucide="package-open" class="w-12 h-12 mx-auto mb-3 opacity-40"></i>
-              <p>No tools found matching your search criteria.</p>
+              <p>Nessun tool trovato con i filtri attuali.</p>
             </div>
           `;
           lucide.createIcons();
@@ -467,16 +571,16 @@
             </div>
             <div class="pt-4 border-t border-borderbg/60 flex items-center justify-between gap-3">
               <span class="text-xs text-gray-500 flex items-center gap-1">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> ${tool.downloads} uses
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> ${tool.downloads} utilizzi
               </span>
-              <button type="button" class="focus-ring px-3 py-1.5 rounded-lg bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors flex items-center gap-1" data-tool-id="${tool.id}">
+              <button type="button" data-tool-id="${tool.id}" class="focus-ring px-3 py-1.5 rounded-lg bg-darkbg hover:bg-brand-500 hover:text-white border border-borderbg text-xs font-medium text-gray-300 transition-colors flex items-center gap-2">
                 <span>${escapeHtml(tool.actionText)}</span>
                 <i data-lucide="external-link" class="w-3 h-3"></i>
               </button>
             </div>
           `;
 
-          const actionButton = card.querySelector('button[data-tool-id]');
+          const actionButton = card.querySelector('[data-tool-id]');
           actionButton.addEventListener('click', () => handleDownload(tool));
 
           container.appendChild(card);
@@ -490,6 +594,7 @@
 
         document.querySelectorAll('.category-btn').forEach((button) => {
           const isActive = button.dataset.cat === category;
+          button.classList.toggle('active', isActive);
           button.classList.toggle('bg-brand-500/20', isActive);
           button.classList.toggle('text-brand-500', isActive);
           button.classList.toggle('font-medium', isActive);
@@ -512,10 +617,10 @@
           container.innerHTML = `
             <div class="py-12 text-center text-gray-500 bg-cardbg border border-borderbg rounded-2xl">
               <i data-lucide="message-square-off" class="w-10 h-10 mx-auto mb-2 opacity-40"></i>
-              <p>No community suggestions yet. Be the first to start the thread!</p>
+              <p>Nessun commento ancora. Sii il primo a scriverne uno!</p>
             </div>
           `;
-          if (totalBadge) totalBadge.textContent = '0 Posts';
+          if (totalBadge) totalBadge.textContent = '0 Post';
           lucide.createIcons();
           return;
         }
@@ -532,15 +637,15 @@
                   <span class="text-xs text-gray-600">•</span>
                   <span class="text-xs text-gray-500">${escapeHtml(comment.date)}</span>
                   <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-800 text-gray-300 border border-borderbg">
-                    ${escapeHtml(comment.tag)}
+                    ${escapeHtml(comment.tag || 'General Feedback')}
                   </span>
                 </div>
                 <p class="text-sm text-gray-300 leading-relaxed">${escapeHtml(comment.content)}</p>
               </div>
 
-              <button type="button" class="focus-ring flex flex-col items-center justify-center p-2 min-w-[48px] rounded-lg border ${comment.userVoted ? 'bg-brand-500/10 border-brand-500/30 text-brand-500' : 'border-borderbg bg-darkbg text-gray-400'} transition-colors" data-comment-id="${comment.id}">
+              <button type="button" data-comment-id="${comment.id}" class="focus-ring flex flex-col items-center justify-center p-2 min-w-[48px] rounded-lg border ${comment.userVoted ? 'bg-brand-500/10 border-brand-500/30 text-brand-500' : 'bg-darkbg border-borderbg text-gray-400'}">
                 <i data-lucide="thumbs-up" class="w-4 h-4 mb-1"></i>
-                <span class="text-xs font-bold">${comment.upvotes}</span>
+                <span class="text-xs font-bold">${Number(comment.upvotes) || 0}</span>
               </button>
             </div>
           `;
@@ -551,11 +656,11 @@
           container.appendChild(card);
         });
 
-        if (totalBadge) totalBadge.textContent = `${comments.length} ${comments.length === 1 ? 'Post' : 'Posts'}`;
+        if (totalBadge) totalBadge.textContent = `${comments.length} ${comments.length === 1 ? 'Post' : 'Post'}`;
         lucide.createIcons();
       }
 
-      function handleCommentSubmit(event) {
+      async function handleCommentSubmit(event) {
         event.preventDefault();
 
         const author = document.getElementById('author-input')?.value.trim();
@@ -563,7 +668,7 @@
         const content = document.getElementById('content-input')?.value.trim();
 
         if (!author || !content) {
-          showToast('Please complete the form before posting.');
+          showToast('Completa nome e messaggio prima di inviare.');
           return;
         }
 
@@ -573,26 +678,31 @@
           tag,
           content,
           upvotes: 1,
-          date: 'Just now',
+          date: 'Adesso',
           userVoted: true,
         };
 
-        comments.unshift(newComment);
-        persistComments();
+        comments = [newComment, ...comments];
+        persistLocalComments();
         renderComments();
         updateStats();
 
+        const serverSaved = await sendCommentToServer(author, content, tag);
+        if (serverSaved) {
+          showToast('Idea inviata al server con successo!');
+        } else {
+          showToast('Idea salvata localmente. Server non disponibile.');
+        }
+
         const form = document.getElementById('comment-form');
         if (form) form.reset();
-
-        showToast('Your suggestion has been added to the board!');
       }
 
       function toggleUpvote(id) {
         comments = comments.map((comment) => {
           if (comment.id !== id) return comment;
 
-          const nextUpvotes = comment.userVoted ? comment.upvotes - 1 : comment.upvotes + 1;
+          const nextUpvotes = comment.userVoted ? (Number(comment.upvotes) || 0) - 1 : (Number(comment.upvotes) || 0) + 1;
           return {
             ...comment,
             upvotes: Math.max(0, nextUpvotes),
@@ -600,7 +710,7 @@
           };
         });
 
-        persistComments();
+        persistLocalComments();
         renderComments();
       }
 
@@ -615,11 +725,11 @@
       function handleDownload(tool) {
         if (tool && tool.githubUrl && tool.githubUrl !== '#') {
           window.open(tool.githubUrl, '_blank', 'noopener,noreferrer');
-          showToast(`Opening ${tool.title}...`);
+          showToast(`Apertura ${tool.title}...`);
           return;
         }
 
-        showToast(`Preparing ${tool.title}...`);
+        showToast(`Preparazione ${tool.title}...`);
       }
 
       function showToast(message) {
@@ -643,106 +753,46 @@
         }
       }
 
-      function escapeHtml(str) {
-        if (str === null || str === undefined) return '';
-        return String(str).replace(/[&<>"']/g, (char) => {
-          const map = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;',
-          };
-          return map[char] || char;
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('tool-search');
+        const commentForm = document.getElementById('comment-form');
+
+        if (searchInput) {
+          searchInput.addEventListener('input', (event) => {
+            searchQuery = event.target.value.trim().toLowerCase();
+            renderTools();
+          });
+        }
+
+        if (commentForm) {
+          commentForm.addEventListener('submit', handleCommentSubmit);
+        }
+
+        document.querySelectorAll('.category-btn').forEach((button) => {
+          button.addEventListener('click', () => {
+            filterTools(button.dataset.cat || 'all');
+          });
         });
-      }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        renderTools();
+        renderComments();
+        updateStats();
+        loadComments();
+        lucide.createIcons();
+      });
     </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const SUPABASE_URL = 'https://hbmpqrgeggamwirsxqep.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhibXBxcmdlZ2dhbXdpcnN4cWVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2MDQ1MTIsImV4cCI6MjEwODE4MDUxMn0.8h1Y8umMhq3TKw-WnwPj3p4sUlQi7D6ilbX2t3dQ6xs';
-  
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // Carica i commenti dal database
-  async function loadComments() {
-    const { data: comments, error } = await supabaseClient
-      .from('comments')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Errore nel caricamento:', error);
-      return;
-    }
-
-    const container = document.getElementById('comments-list');
-    if (!container) return;
-
-    if (!comments || comments.length === 0) {
-      container.innerHTML = '<p class="text-slate-400 text-sm">Nessun commento ancora. Sii il primo a scriverne uno!</p>';
-      return;
-    }
-
-    container.innerHTML = comments.map(c => `
-      <div class="p-4 bg-slate-800 rounded-lg mb-3 border border-slate-700">
-        <div class="flex justify-between items-center mb-2">
-          <span class="font-bold text-cyan-400">${escapeHtml(c.author)}</span>
-          <span class="text-xs text-slate-400">${new Date(c.created_at).toLocaleDateString()}</span>
-        </div>
-        <p class="text-slate-200 text-sm">${escapeHtml(c.text)}</p>
-      </div>
-    `).join('');
-  }
-
-  // Invia un commento a Supabase
-  async function sendComment(author, text) {
-    if (!author || !text) return;
-    
-    const { error } = await supabaseClient
-      .from('comments')
-      .insert([{ author: author, text: text }]);
-
-    if (error) {
-      alert('Errore durante l\'invio: ' + error.message);
-    } else {
-      loadComments();
-    }
-  }
-
-  // Gestisce il click sul pulsante di invio del form
-  async function handleCommentSubmit() {
-    const authorInput = document.getElementById('comment-author');
-    const textInput = document.getElementById('comment-text');
-
-    if (!authorInput || !textInput) {
-      alert('Errore: Campi di testo non trovati nell\'HTML');
-      return;
-    }
-
-    const author = authorInput.value.trim();
-    const text = textInput.value.trim();
-
-    if (!author || !text) {
-      alert('Inserisci sia il nome che il messaggio!');
-      return;
-    }
-
-    await sendComment(author, text);
-
-    // Pulisce il campo del messaggio dopo l'invio
-    textInput.value = '';
-  }
-
-  // Funzione di sicurezza per evitare script malevoli
-  function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, function(m) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-    });
-  }
-
-  // Carica i commenti appena la pagina è pronta
-  document.addEventListener('DOMContentLoaded', loadComments);
-</script>
   </body>
 </html>
