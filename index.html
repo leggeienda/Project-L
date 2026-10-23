@@ -664,6 +664,7 @@
   
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+  // Carica i commenti dal database
   async function loadComments() {
     const { data: comments, error } = await supabaseClient
       .from('comments')
@@ -678,7 +679,7 @@
     const container = document.getElementById('comments-list');
     if (!container) return;
 
-    if (comments.length === 0) {
+    if (!comments || comments.length === 0) {
       container.innerHTML = '<p class="text-slate-400 text-sm">Nessun commento ancora. Sii il primo a scriverne uno!</p>';
       return;
     }
@@ -694,6 +695,7 @@
     `).join('');
   }
 
+  // Invia un commento a Supabase
   async function sendComment(author, text) {
     if (!author || !text) return;
     
@@ -708,12 +710,38 @@
     }
   }
 
+  // Gestisce il click sul pulsante di invio del form
+  async function handleCommentSubmit() {
+    const authorInput = document.getElementById('comment-author');
+    const textInput = document.getElementById('comment-text');
+
+    if (!authorInput || !textInput) {
+      alert('Errore: Campi di testo non trovati nell\'HTML');
+      return;
+    }
+
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
+
+    if (!author || !text) {
+      alert('Inserisci sia il nome che il messaggio!');
+      return;
+    }
+
+    await sendComment(author, text);
+
+    // Pulisce il campo del messaggio dopo l'invio
+    textInput.value = '';
+  }
+
+  // Funzione di sicurezza per evitare script malevoli
   function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
     });
   }
 
+  // Carica i commenti appena la pagina è pronta
   document.addEventListener('DOMContentLoaded', loadComments);
 </script>
   </body>
