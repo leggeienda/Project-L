@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="NovaNest è una community giovane e creativa di sviluppatori che crea strumenti, utility e progetti gratuiti." />
+    <meta
+      name="description"
+      content="NovaNest è una community giovane e creativa che crea tool, utility e progetti open source gratis per tutti."
+    />
     <title>NovaNest — Build, Share, Learn</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -34,9 +38,11 @@
         },
       };
     </script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
+
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
     <header class="sticky top-0 z-50 border-b border-borderbg glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -50,14 +56,17 @@
         </a>
 
         <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Navigazione principale">
-          <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
+          <a href="./index.html" class="text-brand-500 transition-colors">Home</a>
           <a href="./about.html" class="text-gray-400 hover:text-brand-500 transition-colors">Chi siamo</a>
           <a href="./tools.html" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
           <a href="./community.html" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
         </nav>
 
         <div class="flex items-center space-x-3">
-          <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
+          <a
+            href="./community.html"
+            class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20"
+          >
             Proponi idea
           </a>
         </div>
@@ -155,7 +164,11 @@
       </div>
     </footer>
 
-    <div id="toast" aria-live="polite" class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+    <div
+      id="toast"
+      aria-live="polite"
+      class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none"
+    >
       <i data-lucide="check-circle" class="w-5 h-5"></i>
       <span id="toast-message" class="text-sm font-medium">Completato!</span>
     </div>
