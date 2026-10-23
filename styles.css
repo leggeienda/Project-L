@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a1020;
+  --panel: #101b2d;
+  --card: #121f33;
+  --border: #22314d;
+  --brand: #22d3ee;
+  --brand-strong: #0891b2;
+  --text: #ecf3ff;
+  --muted: #9aa7bd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.12), transparent 24%),
+    var(--bg);
+  color: var(--text);
+}
+
+.glass {
+  background: rgba(16, 27, 45, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glow-effect {
+  box-shadow: 0 0 24px -10px rgba(34, 211, 238, 0.18);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.glow-effect:hover {
+  box-shadow: 0 0 36px 0 rgba(34, 211, 238, 0.2);
+  transform: translateY(-2px);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-orb {
+  filter: blur(90px);
+  opacity: 0.45;
+}
+
+.page-shell {
+  position: relative;
+}
+
+.page-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  pointer-events: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #0a1020;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #22314d;
+  border-radius: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #2c3f60;
+}
+
+.focus-ring:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.9);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
