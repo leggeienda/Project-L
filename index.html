@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="NovaNest è una community giovane e creativa che crea tool, utility e progetti open source gratis per tutti."
+      content="NovaNest è una community giovane e creativa che costruisce tool, utility e risorse gratuite per sviluppatori e maker."
     />
     <title>NovaNest — Build, Share, Learn</title>
 
@@ -46,13 +46,11 @@
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
     <header class="sticky top-0 z-50 border-b border-borderbg glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="./index.html" class="flex items-center space-x-3 cursor-pointer focus-ring">
-          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow">
-            <i data-lucide="code-2" class="w-6 h-6"></i>
+        <a href="./index.html" class="flex items-center space-x-3 cursor-pointer focus-ring group">
+          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow transition-transform duration-300 group-hover:scale-105">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
           </div>
-          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">
-            NovaNest
-          </span>
+          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">NovaNest</span>
         </a>
 
         <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Navigazione principale">
@@ -62,11 +60,8 @@
           <a href="./community.html" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
         </nav>
 
-        <div class="flex items-center space-x-3">
-          <a
-            href="./community.html"
-            class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20"
-          >
+        <div class="flex items-center">
+          <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
             Proponi idea
           </a>
         </div>
@@ -74,105 +69,205 @@
     </header>
 
     <main class="flex-grow page-shell">
-      <section id="hero" class="relative py-20 md:py-28 overflow-hidden border-b border-borderbg">
-        <div class="hero-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[360px] bg-brand-500/20 rounded-full pointer-events-none"></div>
-        <div class="hero-orb absolute top-16 right-10 w-[300px] h-[300px] bg-violet-500/10 rounded-full pointer-events-none"></div>
+      <section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div class="hero-orb absolute left-6 top-10 h-72 w-72 rounded-full bg-cyan-400/20"></div>
+        <div class="hero-orb absolute right-10 bottom-0 h-80 w-80 rounded-full bg-violet-500/20"></div>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div class="reveal inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold mb-6">
-            <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-            <span>100% Gratis · Community giovane</span>
+        <div class="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
+          <div class="reveal">
+            <div class="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
+              <span class="h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+              Community & tools
+            </div>
+
+            <h1 class="mt-6 text-4xl md:text-6xl font-black tracking-tight text-white leading-[1.02]">
+              Costruiamo
+              <span class="bg-gradient-to-r from-cyan-300 via-brand-500 to-violet-400 bg-clip-text text-transparent">strumenti utili</span>
+              insieme.
+            </h1>
+
+            <p class="mt-6 max-w-xl text-base md:text-lg text-gray-300 leading-relaxed">
+              NovaNest è una community giovane e creativa per chi vuole condividere idee, creare strumenti gratuiti e imparare costruendo insieme.
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <a href="./community.html" class="focus-ring btn-primary text-white rounded-xl px-6 py-3 font-semibold inline-flex items-center justify-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                Unisciti alla community
+              </a>
+              <a href="./tools.html" class="focus-ring btn-secondary text-slate-200 rounded-xl px-6 py-3 font-semibold inline-flex items-center justify-center gap-2">
+                <i data-lucide="rocket" class="w-4 h-4"></i>
+                Esplora i tool
+              </a>
+            </div>
+
+            <div class="mt-10 flex items-center gap-6 flex-wrap text-sm text-gray-400">
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                Gratis e accessibili
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-violet-400"></span>
+                Idee reali e testate
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
+                Creati dalla community
+              </div>
+            </div>
           </div>
 
-          <h1 class="reveal text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-none">
-            Costruiamo strumenti <br class="hidden sm:inline" />
-            <span class="bg-gradient-to-r from-brand-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent">forti, liberi e creativi.</span>
-          </h1>
+          <div class="reveal">
+            <div class="bg-cardbg border border-borderbg rounded-3xl p-5 shadow-glow">
+              <div class="flex items-center justify-between mb-5">
+                <div>
+                  <p class="text-xs uppercase tracking-[0.2em] text-brand-400 font-semibold">Status</p>
+                  <h2 class="mt-2 text-xl font-bold text-white">Live community</h2>
+                </div>
+                <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+              </div>
 
-          <p class="reveal text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            NovaNest è una community di giovani sviluppatori che crea utilità, script, tool e progetti open source per aiutare chiunque a imparare, creare e risolvere problemi senza barriere.
-          </p>
+              <div class="space-y-4">
+                <div class="bg-darkbg border border-borderbg rounded-2xl p-4">
+                  <div class="flex items-center justify-between text-sm text-gray-400">
+                    <span>Nuovi tool</span>
+                    <span class="text-brand-400 font-semibold">+24%</span>
+                  </div>
+                  <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full w-[72%] rounded-full bg-gradient-to-r from-cyan-400 to-brand-500"></div>
+                  </div>
+                </div>
 
-          <div class="reveal flex flex-col sm:flex-row justify-center gap-4">
-            <a href="./tools.html" class="focus-ring px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium flex items-center justify-center space-x-2 transition-all shadow-lg hover:shadow-brand-500/20">
-              <span>Esplora i tool</span>
-              <i data-lucide="arrow-down" class="w-4 h-4"></i>
-            </a>
-            <a href="./community.html" class="focus-ring px-6 py-3 rounded-xl bg-cardbg hover:bg-gray-800 border border-borderbg text-gray-300 font-medium flex items-center justify-center space-x-2 transition-all">
-              <i data-lucide="message-square" class="w-4 h-4"></i>
-              <span>Partecipa alla community</span>
-            </a>
-          </div>
+                <div class="bg-darkbg border border-borderbg rounded-2xl p-4">
+                  <div class="flex items-center justify-between text-sm text-gray-400">
+                    <span>Feedback</span>
+                    <span class="text-violet-400 font-semibold">1.2k</span>
+                  </div>
+                  <div class="mt-3 h-2 rounded-full bg-slate-800 overflow-hidden">
+                    <div class="h-full w-[84%] rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-500"></div>
+                  </div>
+                </div>
 
-          <div class="reveal grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-16 pt-10 border-t border-borderbg/60 text-center">
-            <div>
-              <div class="text-3xl font-black text-white">100%</div>
-              <div class="text-xs text-gray-500 mt-1">Open & Gratis</div>
-            </div>
-            <div>
-              <div class="text-3xl font-black text-white" id="stat-tools-count">0</div>
-              <div class="text-xs text-gray-500 mt-1">Tool disponibili</div>
-            </div>
-            <div class="col-span-2 md:col-span-1">
-              <div class="text-3xl font-black text-white" id="stat-comments-count">0</div>
-              <div class="text-xs text-gray-500 mt-1">Idee della community</div>
+                <div class="border border-dashed border-borderbg rounded-2xl p-4 text-sm text-gray-300">
+                  <div class="flex items-center gap-2 mb-2 text-brand-400">
+                    <i data-lucide="message-square-text" class="w-4 h-4"></i>
+                    Ultimo suggerimento
+                  </div>
+                  <p class="leading-relaxed">
+                    “Vorremmo un tool per organizzare file, compiti e backup in un solo posto.”
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="reveal grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
-            <div class="mb-4 inline-flex p-2 rounded-xl bg-brand-500/10 text-brand-500">
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="reveal text-center mb-10">
+          <p class="text-brand-500 uppercase tracking-[0.2em] text-xs font-semibold">Cosa facciamo</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-black text-white">Da un’idea a un tool utile.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="reveal soft-card rounded-2xl p-6">
+            <div class="inline-flex items-center justify-center rounded-xl w-12 h-12 bg-cyan-500/10 border border-cyan-400/20 text-cyan-400">
+              <i data-lucide="lightbulb" class="w-5 h-5"></i>
+            </div>
+            <h3 class="mt-5 text-xl font-bold text-white">Idee reali</h3>
+            <p class="mt-3 text-gray-300 leading-relaxed">
+              Ogni proposta nasce da un bisogno concreto, raccontato da persone reali e testato nella pratica.
+            </p>
+          </div>
+
+          <div class="reveal soft-card rounded-2xl p-6">
+            <div class="inline-flex items-center justify-center rounded-xl w-12 h-12 bg-violet-500/10 border border-violet-400/20 text-violet-400">
               <i data-lucide="rocket" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">Veloce</h3>
-            <p class="text-sm text-gray-400">Strumenti creati per risolvere problemi reali in modo semplice, chiaro e utile.</p>
+            <h3 class="mt-5 text-xl font-bold text-white">Prototipazione</h3>
+            <p class="mt-3 text-gray-300 leading-relaxed">
+              Trasformiamo feedback e richieste in prototipi semplici, leggeri e facili da usare.
+            </p>
           </div>
 
-          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
-            <div class="mb-4 inline-flex p-2 rounded-xl bg-brand-500/10 text-brand-500">
+          <div class="reveal soft-card rounded-2xl p-6">
+            <div class="inline-flex items-center justify-center rounded-xl w-12 h-12 bg-emerald-500/10 border border-emerald-400/20 text-emerald-400">
               <i data-lucide="users" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">Community-first</h3>
-            <p class="text-sm text-gray-400">Ogni idea nasce dalla gente: dai feedback, dalle richieste e dalle esperienze reali.</p>
+            <h3 class="mt-5 text-xl font-bold text-white">Condivisione</h3>
+            <p class="mt-3 text-gray-300 leading-relaxed">
+              Siamo una community in cui gli strumenti e le idee vengono condivisi liberamente per crescere insieme.
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
-            <div class="mb-4 inline-flex p-2 rounded-xl bg-brand-500/10 text-brand-500">
-              <i data-lucide="sparkles" class="w-5 h-5"></i>
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="reveal mb-10 text-center">
+          <p class="text-brand-500 uppercase tracking-[0.2em] text-xs font-semibold">Toolkit</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-black text-white">Strumenti creati per migliorare il lavoro e la vita quotidiana.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <article class="reveal soft-card rounded-2xl p-6">
+            <span class="inline-flex px-3 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-500 text-xs font-semibold">C++</span>
+            <h3 class="mt-4 text-xl font-bold text-white">Fast File Organizer</h3>
+            <p class="mt-3 text-sm text-gray-400 leading-relaxed">Organizza file e cartelle in modo intelligente e veloce da desktop o terminale.</p>
+            <div class="mt-5 flex items-center justify-between text-sm text-gray-400">
+              <span>Utility</span>
+              <span class="text-brand-400 font-medium">Open</span>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">Open & creativo</h3>
-            <p class="text-sm text-gray-400">Progetti pensati per essere condivisi, usati e migliorati insieme da tutti.</p>
-          </div>
+          </article>
+
+          <article class="reveal soft-card rounded-2xl p-6">
+            <span class="inline-flex px-3 py-1 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-semibold">School</span>
+            <h3 class="mt-4 text-xl font-bold text-white">GPA Tracker</h3>
+            <p class="mt-3 text-sm text-gray-400 leading-relaxed">Calcola medie, obiettivi scolastici e andamento dei voti in pochi secondi.</p>
+            <div class="mt-5 flex items-center justify-between text-sm text-gray-400">
+              <span>Productivity</span>
+              <span class="text-violet-400 font-medium">Popular</span>
+            </div>
+          </article>
+
+          <article class="reveal soft-card rounded-2xl p-6">
+            <span class="inline-flex px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">Web</span>
+            <h3 class="mt-4 text-xl font-bold text-white">Workflow Dashboard</h3>
+            <p class="mt-3 text-sm text-gray-400 leading-relaxed">Centro per raccogliere task, feedback e idee da usare in modo più semplice.</p>
+            <div class="mt-5 flex items-center justify-between text-sm text-gray-400">
+              <span>Product</span>
+              <span class="text-emerald-400 font-medium">Fresh</span>
+            </div>
+          </article>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-borderbg bg-darkbg py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 space-y-4 md:space-y-0">
-        <div class="flex items-center space-x-2">
-          <i data-lucide="code" class="w-4 h-4 text-brand-500"></i>
-          <span>NovaNest © 2026. Creato con passione, curiosità e AI.</span>
+    <footer class="border-t border-slate-800 bg-slate-950/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="code" class="w-4 h-4 text-brand-400"></i>
+          <span>NovaNest © 2026</span>
         </div>
-        <div class="flex space-x-6">
-          <a href="./index.html" class="hover:text-gray-400 transition-colors">Home</a>
-          <a href="./tools.html" class="hover:text-gray-400 transition-colors">Toolkit</a>
-          <a href="./community.html" class="hover:text-gray-400 transition-colors">Community</a>
+        <div class="flex items-center gap-6">
+          <a href="./index.html" class="hover:text-brand-400 transition-colors">Home</a>
+          <a href="./about.html" class="hover:text-brand-400 transition-colors">Chi siamo</a>
+          <a href="./tools.html" class="hover:text-brand-400 transition-colors">Toolkit</a>
+          <a href="./community.html" class="hover:text-brand-400 transition-colors">Community</a>
         </div>
       </div>
     </footer>
 
-    <div
-      id="toast"
-      aria-live="polite"
-      class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none"
-    >
-      <i data-lucide="check-circle" class="w-5 h-5"></i>
-      <span id="toast-message" class="text-sm font-medium">Completato!</span>
-    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+          });
+        }, { threshold: 0.12 });
 
-    <script src="./script.js"></script>
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        if (window.lucide) lucide.createIcons();
+      });
+    </script>
   </body>
 </html>
