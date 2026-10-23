@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Community di NovaNest: proponi nuove idee, feedback e tool da costruire insieme." />
+    <title>Community | NovaNest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
+    <header class="sticky top-0 z-50 border-b border-borderbg glass">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="./index.html" class="flex items-center space-x-3">
+          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500"><i data-lucide="code-2" class="w-6 h-6"></i></div>
+          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">NovaNest</span>
+        </a>
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
+          <a href="./about.html" class="text-gray-400 hover:text-brand-500 transition-colors">Chi siamo</a>
+          <a href="./tools.html" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
+          <a href="./community.html" class="text-brand-500 transition-colors">Community</a>
+        </nav>
+        <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">Proponi idea</a>
+      </div>
+    </header>
+
+    <main class="flex-grow page-shell">
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div class="lg:col-span-1">
+            <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect sticky top-24">
+              <div class="flex items-center space-x-2 text-brand-500 mb-2">
+                <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                <h3 class="font-bold text-white text-lg">Suggerisci un tool</h3>
+              </div>
+              <p class="text-xs text-gray-400 mb-6">Hai un'idea? Scrivila qui e la community la valuterà insieme.</p>
+
+              <form id="comment-form" class="space-y-4" novalidate>
+                <div>
+                  <label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Nome / Username</label>
+                  <input type="text" id="author-input" maxlength="40" placeholder="es. Alex" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-brand-500" />
+                </div>
+
+                <div>
+                  <label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Tag / Categoria</label>
+                  <select id="tag-input" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 focus:outline-none focus:border-brand-500">
+                    <option value="Feature Request">Feature Request</option>
+                    <option value="New Tool Idea">New Tool Idea</option>
+                    <option value="Bug Report">Bug Report</option>
+                    <option value="General Feedback">General Feedback</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">La tua idea o feedback</label>
+                  <textarea id="content-input" rows="4" maxlength="500" placeholder="Spiega cosa vorresti costruire..." class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-brand-500 resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="focus-ring w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-lg transition-colors flex items-center justify-center space-x-2">
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  <span>Pubblica idea</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center space-x-3">
+                <i data-lucide="message-square" class="w-6 h-6 text-brand-500"></i>
+                <h3 class="text-xl font-bold text-white">Idee & feedback della community</h3>
+              </div>
+              <span class="text-xs text-gray-500" id="comments-total-badge">0 Post</span>
+            </div>
+
+            <div id="comments-container" class="space-y-4"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-borderbg bg-darkbg py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 space-y-4 md:space-y-0">
+        <div class="flex items-center space-x-2"><i data-lucide="code" class="w-4 h-4 text-brand-500"></i><span>NovaNest © 2026.</span></div>
+        <div class="flex space-x-6"><a href="./index.html" class="hover:text-gray-400 transition-colors">Home</a><a href="./about.html" class="hover:text-gray-400 transition-colors">Chi siamo</a><a href="./tools.html" class="hover:text-gray-400 transition-colors">Toolkit</a></div>
+      </div>
+    </footer>
+
+    <div id="toast" aria-live="polite" class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+      <i data-lucide="check-circle" class="w-5 h-5"></i>
+      <span id="toast-message" class="text-sm font-medium">Completato!</span>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
