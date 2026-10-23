@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Scopri la missione di NovaNest: costruire strumenti gratuiti, creativi e accessibili per tutti." />
+    <title>Chi siamo | NovaNest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
+    <header class="sticky top-0 z-50 border-b border-borderbg glass">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="./index.html" class="flex items-center space-x-3">
+          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500">
+            <i data-lucide="code-2" class="w-6 h-6"></i>
+          </div>
+          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">NovaNest</span>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Navigazione principale">
+          <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
+          <a href="./about.html" class="text-brand-500 transition-colors">Chi siamo</a>
+          <a href="./tools.html" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
+          <a href="./community.html" class="text-gray-400 hover:text-brand-500 transition-colors">Community</a>
+        </nav>
+
+        <a href="./community.html" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">Proponi idea</a>
+      </div>
+    </header>
+
+    <main class="flex-grow page-shell">
+      <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="reveal text-center mb-10">
+          <p class="text-brand-500 text-sm uppercase tracking-[0.2em] font-semibold">Chi siamo</p>
+          <h1 class="text-4xl md:text-5xl font-black text-white mt-4">Una community che crea cose utili insieme.</h1>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-8 glow-effect">
+            <h2 class="text-2xl font-bold text-white mb-4">La nostra missione</h2>
+            <p class="text-gray-300 leading-relaxed">
+              NovaNest nasce per dare spazio a sviluppatori giovani, curiosi e creativi. Vogliamo costruire strumenti gratuiti, utili e accessibili, senza barriere, senza paywall e senza complessità inutile.
+            </p>
+          </div>
+
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-8 glow-effect">
+            <h2 class="text-2xl font-bold text-white mb-4">Come lavoriamo</h2>
+            <p class="text-gray-300 leading-relaxed">
+              Ascoltiamo la community, raccogliamo idee, trasformiamo richieste reali in software utile e condividiamo i risultati con tutti. Ogni progetto nasce da un bisogno concreto.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-12 grid md:grid-cols-3 gap-6">
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <p class="text-3xl font-black text-brand-500 mb-2">100%</p>
+            <p class="text-gray-300">Open, libero e senza costi nascosti.</p>
+          </div>
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <p class="text-3xl font-black text-brand-500 mb-2">Young</p>
+            <p class="text-gray-300">Pensato per chi ama costruire e imparare in gruppo.</p>
+          </div>
+          <div class="bg-cardbg border border-borderbg rounded-2xl p-6 glow-effect">
+            <p class="text-3xl font-black text-brand-500 mb-2">Live</p>
+            <p class="text-gray-300">Le idee diventano strumenti e vengono testati nella community.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-borderbg bg-darkbg py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 space-y-4 md:space-y-0">
+        <div class="flex items-center space-x-2"><i data-lucide="code" class="w-4 h-4 text-brand-500"></i><span>NovaNest © 2026.</span></div>
+        <div class="flex space-x-6"><a href="./index.html" class="hover:text-gray-400 transition-colors">Home</a><a href="./tools.html" class="hover:text-gray-400 transition-colors">Toolkit</a><a href="./community.html" class="hover:text-gray-400 transition-colors">Community</a></div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
