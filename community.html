@@ -3,204 +3,337 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="NovaNest community: share ideas, feature requests, and tool suggestions together." />
+    <meta name="description" content="Explore NovaNest community ideas, share inspiration, and help shape useful tools together." />
+    <meta name="theme-color" content="#0a1020" />
     <title>Community | NovaNest</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              brand: { 50: '#eefbff', 100: '#d9f7ff', 400: '#5eead4', 500: '#22d3ee', 600: '#0891b2', 700: '#0f766e', 900: '#123b4a' },
-              darkbg: '#07101f',
-              panel: '#0d192b',
-              cardbg: '#101d31',
-              borderbg: '#1e3553',
-              accent: '#7c3aed',
-            },
-            boxShadow: {
-              glow: '0 0 32px rgba(34, 211, 238, 0.25)',
-            },
-          },
-        },
+        theme: { extend: { colors: {
+          brand: { 50: '#eefbff', 100: '#d9f7ff', 400: '#5eead4', 500: '#22d3ee', 600: '#0891b2', 700: '#0f766e', 900: '#123b4a' },
+          darkbg: '#0a1020', panel: '#101b2d', cardbg: '#121f33', borderbg: '#22314d', accent: '#7c3aed'
+        }, boxShadow: { glow: '0 0 32px rgba(34, 211, 238, 0.25)' } } }
       };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="./styles.css" />
     <style>
-      :root {
-        --bg: #07101f;
-        --panel: #0d192b;
-        --card: #101d31;
-        --border: #1e3553;
-        --brand: #22d3ee;
-        --brand-strong: #0891b2;
-        --text: #ecf5ff;
-        --muted: #9aa9c1;
-      }
-
-      body {
-        background:
-          radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 32%),
-          radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.14), transparent 28%),
-          var(--bg);
-      }
-
-      .glass {
-        background: rgba(9, 18, 31, 0.78);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-      }
-
-      .soft-card {
-        background: linear-gradient(180deg, rgba(18, 31, 51, 0.95), rgba(12, 22, 37, 0.98));
-        border: 1px solid rgba(148, 163, 184, 0.16);
-        box-shadow: 0 14px 42px rgba(2, 8, 21, 0.32), 0 0 24px rgba(34, 211, 238, 0.06);
-      }
-
-      .page-shell::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-        background-size: 24px 24px;
-        mask-image: radial-gradient(circle at center, black, transparent 80%);
-        pointer-events: none;
-      }
-
-      .glow-ring {
-        box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2), 0 0 28px rgba(34, 211, 238, 0.12);
-      }
-
-      .comment-item {
-        animation: inUp 0.45s ease-out;
-      }
-
-      @keyframes inUp {
-        from { opacity: 0; transform: translateY(12px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+      :root { --community-bg:#0a1020; --community-panel:#101b2d; --community-card:#121f33; --community-border:#22314d; --community-cyan:#22d3ee; }
+      body { background:radial-gradient(circle at 50% -10%,rgba(34,211,238,.15),transparent 36%),radial-gradient(circle at 95% 55%,rgba(124,58,237,.11),transparent 27%),var(--community-bg); }
+      .community-hero-orb { position:absolute; width:19rem; height:19rem; border-radius:50%; filter:blur(90px); opacity:.2; pointer-events:none; }
+      .community-card { background:linear-gradient(180deg,rgba(18,31,51,.93),rgba(12,21,36,.96)); border:1px solid rgba(148,163,184,.16); box-shadow:0 14px 40px rgba(2,8,21,.28),0 0 22px rgba(34,211,238,.045); }
+      .network-wrap { position:relative; height:430px; overflow:hidden; background:radial-gradient(ellipse at 50% 50%,rgba(34,211,238,.07),transparent 55%),linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),#0b1525; background-size:auto,25px 25px,25px 25px,auto; }
+      #inspiration-canvas { display:block; width:100%; height:100%; touch-action:pan-y; }
+      .network-prompt { position:absolute; left:16px; bottom:14px; display:flex; align-items:center; gap:7px; color:#94a3b8; font-size:10px; padding:7px 10px; border:1px solid rgba(148,163,184,.15); background:rgba(10,16,32,.78); border-radius:10px; pointer-events:none; }
+      .network-prompt svg { width:13px; height:13px; color:#67e8f9; }
+      .quote-panel { background:linear-gradient(120deg,rgba(34,211,238,.09),rgba(124,58,237,.08)),rgba(12,21,36,.9); }
+      .quote-copy { text-wrap:balance; }
+      .idea-filter { transition:color .2s,border-color .2s,background .2s,transform .2s; }
+      .idea-filter:hover { transform:translateY(-1px); border-color:rgba(34,211,238,.4); }
+      .comment-item { animation:commentIn .42s cubic-bezier(.16,1,.3,1) both; }
+      @keyframes commentIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+      .featured-glow { box-shadow:inset 0 0 0 1px rgba(34,211,238,.15),0 0 34px rgba(34,211,238,.09); }
+      @media(max-width:640px) { .network-wrap { height:370px; } }
+      @media(prefers-reduced-motion:reduce) { .comment-item { animation:none; } }
     </style>
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
     <header class="sticky top-0 z-50 border-b border-borderbg glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="./index.html" class="flex items-center space-x-3 focus-ring group">
-          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow transition-transform duration-300 group-hover:scale-105">
-            <i data-lucide="code-2" class="w-5 h-5"></i>
-          </div>
+        <a href="./index.html" class="flex items-center space-x-3 cursor-pointer focus-ring group" aria-label="NovaNest home">
+          <span class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow transition-transform duration-300 group-hover:scale-105"><i data-lucide="code-2" class="w-5 h-5"></i></span>
           <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">NovaNest</span>
         </a>
-
         <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Main navigation">
           <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
           <a href="./about.html" class="text-gray-400 hover:text-brand-500 transition-colors">About</a>
           <a href="./tools.html" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
-          <a href="./community.html" class="text-brand-500 transition-colors">Community</a>
+          <a href="./community.html" class="text-brand-500 transition-colors" aria-current="page">Community</a>
         </nav>
-
-        <a href="#comment-form" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
-          Share idea
-        </a>
+        <a href="#comment-form" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">Share an idea</a>
       </div>
     </header>
 
     <main class="flex-grow page-shell relative">
-      <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="mb-10 max-w-2xl">
-          <div class="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
-            <span class="h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-            Community & tools
-          </div>
-          <h1 class="mt-6 text-4xl md:text-6xl font-black tracking-tight text-white leading-[1.02]">
-            Build the next
-            <span class="bg-gradient-to-r from-cyan-300 via-brand-500 to-violet-400 bg-clip-text text-transparent">great idea</span>
-            together.
-          </h1>
-          <p class="mt-5 text-base text-gray-300 leading-relaxed">
-            Share your product ideas, feature requests, bug reports, and tool suggestions. The community votes on what deserves to be built next.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-8">
-          <aside class="soft-card glow-ring rounded-3xl p-6 h-fit sticky top-24">
-            <div class="flex items-center gap-2 text-brand-500 mb-3">
-              <i data-lucide="lightbulb" class="w-5 h-5"></i>
-              <h2 class="text-lg font-bold text-white">Suggest an idea</h2>
+      <section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 pb-14">
+        <div class="community-hero-orb bg-cyan-400/30 left-0 top-8"></div>
+        <div class="community-hero-orb bg-violet-500/25 right-4 top-20"></div>
+        <div class="relative z-10 grid lg:grid-cols-[1.05fr_.95fr] gap-10 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400"><span class="h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span> Ideas grow here</div>
+            <h1 class="mt-6 text-4xl md:text-6xl font-black tracking-tight text-white leading-[1.03]">Build what<br /><span class="bg-gradient-to-r from-cyan-300 via-brand-500 to-violet-400 bg-clip-text text-transparent">could be.</span></h1>
+            <p class="mt-5 max-w-xl text-sm md:text-base text-gray-300 leading-relaxed">A good idea can start anywhere. Share a challenge, suggest a tool, or help someone else’s thought become something useful.</p>
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="#comment-form" class="focus-ring btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white"><i data-lucide="sparkles" class="w-4 h-4"></i> Share your idea</a>
+              <a href="#inspiration" class="focus-ring btn-secondary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-200"><i data-lucide="orbit" class="w-4 h-4"></i> Explore inspiration</a>
             </div>
-            <p class="text-xs text-gray-400 mb-6">Tell us what should exist next in NovaNest.</p>
+            <div class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-400">
+              <span class="inline-flex items-center gap-2"><i data-lucide="heart-handshake" class="w-4 h-4 text-emerald-400"></i> Made together</span>
+              <span class="inline-flex items-center gap-2"><i data-lucide="lightbulb" class="w-4 h-4 text-violet-400"></i> Open to everyone</span>
+              <span class="inline-flex items-center gap-2"><i data-lucide="zap" class="w-4 h-4 text-brand-400"></i> Built for real needs</span>
+            </div>
+          </div>
+          <div class="community-card rounded-3xl p-5 md:p-6 glow-effect">
+            <div class="flex items-center justify-between mb-5">
+              <div><p class="text-[10px] uppercase tracking-[.2em] text-brand-400 font-semibold">Community pulse</p><h2 class="mt-1 text-lg font-bold text-white">Small sparks. Big momentum.</h2></div>
+              <span class="flex h-3 w-3 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_16px_rgba(52,211,153,.65)]" aria-label="Active"></span>
+            </div>
+            <div class="space-y-3">
+              <div class="rounded-2xl bg-darkbg/80 border border-borderbg p-4">
+                <div class="flex justify-between text-xs text-gray-400"><span>Ideas shared</span><span class="text-brand-400 font-semibold">Open to all</span></div>
+                <div class="mt-3 h-1.5 rounded-full bg-slate-800 overflow-hidden"><div class="h-full w-[76%] rounded-full bg-gradient-to-r from-cyan-400 to-brand-500"></div></div>
+              </div>
+              <div class="rounded-2xl bg-darkbg/80 border border-borderbg p-4">
+                <div class="flex justify-between text-xs text-gray-400"><span>Built through feedback</span><span class="text-violet-400 font-semibold">Together</span></div>
+                <div class="mt-3 h-1.5 rounded-full bg-slate-800 overflow-hidden"><div class="h-full w-[64%] rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-500"></div></div>
+              </div>
+              <div class="rounded-2xl border border-dashed border-borderbg p-4 text-xs text-gray-300 leading-relaxed"><span class="flex items-center gap-2 mb-2 text-brand-400 font-semibold"><i data-lucide="quote" class="w-4 h-4"></i> A thought to take with you</span><p class="m-0">“The best tools begin with someone noticing a small, real problem.”</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <section id="inspiration" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16" aria-labelledby="inspiration-title">
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+          <div><p class="text-brand-400 uppercase tracking-[.2em] text-[10px] font-bold">A connected community</p><h2 id="inspiration-title" class="mt-2 text-2xl md:text-3xl font-black text-white">Ideas that move us forward.</h2></div>
+          <p class="max-w-md text-xs text-gray-400 leading-relaxed">Each glowing node carries a reminder: curiosity, care, and small steps can turn into something real.</p>
+        </div>
+        <div class="community-card rounded-3xl overflow-hidden">
+          <div class="network-wrap" id="network-wrap"><canvas id="inspiration-canvas" role="img" aria-label="Animated network of inspirational messages. Select a message below to read it."></canvas><div class="network-prompt"><i data-lucide="mouse-pointer-2"></i> Move through the ideas · select a node</div></div>
+          <div class="quote-panel border-t border-borderbg px-5 py-4 md:px-6 md:py-5 flex flex-col sm:flex-row sm:items-center gap-4" aria-live="polite" aria-atomic="true">
+            <div class="flex items-center justify-center w-10 h-10 shrink-0 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400"><i data-lucide="quote" class="w-5 h-5"></i></div>
+            <div class="min-w-0 flex-1"><p class="text-[9px] uppercase tracking-[.18em] font-bold text-brand-400 mb-1" id="quote-label">A community reminder</p><p class="quote-copy m-0 text-sm md:text-base font-semibold text-white" id="quote-detail">Start where you are. Build what you wish existed.</p></div>
+            <div class="text-[10px] text-gray-500" id="quote-index">Message 1 of 7</div>
+          </div>
+          <div class="sr-only" id="inspiration-options" aria-label="Inspirational messages"></div>
+        </div>
+      </section>
+
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20" aria-label="Post and explore community ideas">
+        <div class="grid lg:grid-cols-[.8fr_1.5fr] gap-7 items-start">
+          <aside class="community-card rounded-3xl p-6 sticky top-24" id="suggest">
+            <div class="flex items-center gap-3 mb-2"><div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-cyan-400"><i data-lucide="lightbulb" class="w-5 h-5"></i></div><h2 class="text-lg font-bold text-white">Suggest an idea</h2></div>
+            <p class="text-xs text-gray-400 mb-6">What would make your work, learning, or everyday life a little better?</p>
             <form id="comment-form" class="space-y-4" novalidate>
-              <div>
-                <label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Name / Username</label>
-                <input type="text" id="author-input" maxlength="40" placeholder="e.g. Alex" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500" />
-              </div>
-
-              <div>
-                <label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Category</label>
-                <select id="tag-input" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 focus:outline-none focus:border-brand-500">
-                  <option value="Feature Request">Feature Request</option>
-                  <option value="New Tool Idea">New Tool Idea</option>
-                  <option value="Bug Report">Bug Report</option>
-                  <option value="General Feedback">General Feedback</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">Your idea</label>
-                <textarea id="content-input" rows="5" maxlength="500" placeholder="Describe what you’d like to build or improve..." class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500 resize-none"></textarea>
-              </div>
-
-              <button type="submit" class="focus-ring w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-lg transition-colors flex items-center justify-center gap-2">
-                <i data-lucide="send" class="w-4 h-4"></i>
-                <span>Publish idea</span>
-              </button>
+              <div><label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Name / Username</label><input type="text" id="author-input" maxlength="40" placeholder="e.g. Alex" autocomplete="name" class="input-shell w-full px-3 py-2 rounded-lg text-sm text-gray-200 placeholder-gray-500" required /></div>
+              <div><label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Category</label><select id="tag-input" class="input-shell w-full px-3 py-2 rounded-lg text-sm text-gray-200"><option value="Feature Request">Feature Request</option><option value="New Tool Idea">New Tool Idea</option><option value="Bug Report">Bug Report</option><option value="General Feedback">General Feedback</option></select></div>
+              <div><label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">Your idea or message</label><textarea id="content-input" rows="5" maxlength="500" placeholder="Share the problem, idea, or encouragement..." class="input-shell w-full px-3 py-2 rounded-lg text-sm text-gray-200 placeholder-gray-500 resize-y" required></textarea><div class="mt-1 text-right text-[10px] text-gray-500"><span id="character-count">0</span>/500</div></div>
+              <button type="submit" class="focus-ring btn-primary w-full py-3 rounded-xl text-white text-sm font-semibold flex items-center justify-center gap-2"><i data-lucide="send" class="w-4 h-4"></i> Publish to the community</button>
+              <p class="text-[10px] text-gray-500 leading-relaxed m-0">Posts are saved in this browser and synced to the community when the server is available.</p>
             </form>
           </aside>
 
-          <div class="space-y-6">
-            <div class="soft-card rounded-3xl p-6">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="p-2 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-500">
-                    <i data-lucide="message-square-text" class="w-5 h-5"></i>
-                  </div>
-                  <h2 class="text-xl font-bold text-white">Community ideas</h2>
-                </div>
-                <span class="text-xs text-gray-400" id="comments-total-badge">0 posts</span>
+          <div class="space-y-5">
+            <section id="featured-idea" class="community-card featured-glow rounded-3xl p-5 md:p-6" aria-labelledby="featured-heading">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-center gap-3"><div class="p-2.5 rounded-xl bg-violet-500/10 border border-violet-400/20 text-violet-300"><i data-lucide="sparkles" class="w-5 h-5"></i></div><div><p class="text-[9px] uppercase tracking-[.2em] text-violet-300 font-bold mb-1">In the spotlight</p><h2 id="featured-heading" class="text-sm font-bold text-white">Featured community idea</h2></div></div>
+                <span id="featured-category" class="shrink-0 px-2.5 py-1 rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[10px] font-semibold">Community idea</span>
               </div>
+              <p id="featured-title" class="mt-5 text-lg md:text-xl font-bold text-white leading-snug">Your next idea could be the one that helps everyone.</p>
+              <p id="featured-body" class="mt-2 text-xs text-gray-400 leading-relaxed">A community highlight selected for discussion.</p>
+              <div class="mt-5 pt-4 border-t border-borderbg/70 flex items-center justify-between gap-3"><span id="featured-author" class="text-[11px] text-gray-400">NovaNest Community</span><button id="featured-vote-btn" type="button" class="focus-ring vote-btn inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-brand-500/25 bg-brand-500/10 text-brand-300 text-xs font-semibold" disabled><i data-lucide="thumbs-up" class="w-4 h-4"></i><span id="featured-votes">0</span><span>votes</span></button></div>
+            </section>
 
-              <div id="comments-container" class="space-y-4"></div>
-            </div>
+            <section class="community-card rounded-3xl p-5 md:p-6" aria-labelledby="ideas-heading">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+                <div class="flex items-center gap-3"><div class="p-2 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-500"><i data-lucide="messages-square" class="w-5 h-5"></i></div><div><h2 id="ideas-heading" class="text-lg font-bold text-white">Community ideas</h2><p class="text-[10px] text-gray-500 mt-1">Share feedback, vote, and help shape what comes next.</p></div></div>
+                <span class="text-xs text-gray-400 px-2.5 py-1 rounded-full bg-darkbg border border-borderbg" id="comments-total-badge">0 posts</span>
+              </div>
+              <div class="flex flex-col gap-3 mb-5">
+                <div class="flex items-center gap-2 overflow-x-auto pb-1" role="group" aria-label="Filter ideas by category">
+                  <button type="button" data-comment-filter="all" class="idea-filter shrink-0 px-3 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400 text-[10px] font-semibold">All ideas</button>
+                  <button type="button" data-comment-filter="Feature Request" class="idea-filter shrink-0 px-3 py-1.5 rounded-full border border-borderbg text-gray-400 text-[10px] font-semibold">Features</button>
+                  <button type="button" data-comment-filter="New Tool Idea" class="idea-filter shrink-0 px-3 py-1.5 rounded-full border border-borderbg text-gray-400 text-[10px] font-semibold">Tool ideas</button>
+                  <button type="button" data-comment-filter="Bug Report" class="idea-filter shrink-0 px-3 py-1.5 rounded-full border border-borderbg text-gray-400 text-[10px] font-semibold">Bug reports</button>
+                  <button type="button" data-comment-filter="General Feedback" class="idea-filter shrink-0 px-3 py-1.5 rounded-full border border-borderbg text-gray-400 text-[10px] font-semibold">Feedback</button>
+                </div>
+                <div class="flex items-center justify-between gap-3"><span class="text-[10px] text-gray-500">Sort ideas</span><div class="flex gap-2" role="group" aria-label="Sort ideas"><button type="button" data-comment-sort="newest" class="idea-filter px-2.5 py-1 rounded-lg border border-brand-500/30 bg-brand-500/10 text-brand-400 text-[10px] font-semibold">Newest</button><button type="button" data-comment-sort="popular" class="idea-filter px-2.5 py-1 rounded-lg border border-borderbg text-gray-400 text-[10px] font-semibold">Most voted</button><button type="button" data-comment-sort="oldest" class="idea-filter px-2.5 py-1 rounded-lg border border-borderbg text-gray-400 text-[10px] font-semibold">Oldest</button></div></div>
+              </div>
+              <div id="comments-container" class="space-y-3" aria-live="polite"></div>
+            </section>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-borderbg bg-darkbg/70">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-        <div class="flex items-center gap-2">
-          <i data-lucide="code" class="w-4 h-4 text-brand-400"></i>
-          <span>NovaNest © 2026</span>
-        </div>
-        <div class="flex items-center gap-6">
-          <a href="./index.html" class="hover:text-brand-400 transition-colors">Home</a>
-          <a href="./about.html" class="hover:text-brand-400 transition-colors">About</a>
-          <a href="./tools.html" class="hover:text-brand-400 transition-colors">Toolkit</a>
-          <a href="./community.html" class="hover:text-brand-400 transition-colors">Community</a>
-        </div>
+    <footer class="border-t border-slate-800 bg-slate-950/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-4">
+        <div class="flex items-center gap-2"><i data-lucide="code" class="w-4 h-4 text-brand-400"></i><span>NovaNest © 2026</span></div>
+        <div class="flex items-center gap-6"><a href="./index.html" class="hover:text-brand-400 transition-colors">Home</a><a href="./about.html" class="hover:text-brand-400 transition-colors">About</a><a href="./tools.html" class="hover:text-brand-400 transition-colors">Toolkit</a><a href="./community.html" class="hover:text-brand-400 transition-colors">Community</a></div>
       </div>
     </footer>
 
-    <div id="toast" aria-live="polite" class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
-      <i data-lucide="check-circle" class="w-5 h-5"></i>
-      <span id="toast-message" class="text-sm font-medium">Success!</span>
-    </div>
+    <div id="toast" aria-live="polite" class="fixed bottom-5 right-5 z-50 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none"><i data-lucide="check-circle" class="w-5 h-5"></i><span id="toast-message" class="text-sm font-medium">Success!</span></div>
 
     <script src="./script.js"></script>
     <script>
+      (() => {
+        const messages = [
+          { title: 'Start where you are.', text: 'Build what you wish existed.' },
+          { title: 'Small ideas matter.', text: 'Useful tools often begin with one small improvement.' },
+          { title: 'Stay curious.', text: 'Good questions can lead to remarkable things.' },
+          { title: 'Make it together.', text: 'Shared ideas grow stronger with every perspective.' },
+          { title: 'Progress is a practice.', text: 'One thoughtful step is still a step forward.' },
+          { title: 'Build for real people.', text: 'The best solutions begin with listening.' },
+          { title: 'Share what you learn.', text: 'Your experience might be someone else’s starting point.' },
+        ];
+        const canvas = document.getElementById('inspiration-canvas');
+        const wrap = document.getElementById('network-wrap');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        const detail = document.getElementById('quote-detail');
+        const label = document.getElementById('quote-label');
+        const indexLabel = document.getElementById('quote-index');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const pointer = { x: -1000, y: -1000, active: false };
+        let width = 0, height = 0, dpr = 1, selected = 0, hovered = -1, lastTime = 0, frame = 0;
+        const nodes = messages.map((message, index) => ({ ...message, phase: index * 1.41, x: 0, y: 0, vx: 0, vy: 0, ax: 0, ay: 0 }));
+        const colors = ['#22d3ee', '#38bdf8', '#818cf8', '#2dd4bf', '#60a5fa', '#a78bfa', '#5eead4'];
+        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+        function positionNodes() {
+          const small = width < 600;
+          const radius = small ? 36 : 43;
+          nodes.forEach((node, i) => {
+            if (small) {
+              const col = i % 3, row = Math.floor(i / 3);
+              node.ax = width * (.19 + col * .31);
+              node.ay = height * (row === 0 ? .31 : .72);
+            } else {
+              const row = i < 4 ? 0 : 1;
+              const col = row === 0 ? i : i - 4;
+              const count = row === 0 ? 4 : 3;
+              node.ax = width * (.12 + (col + .5) * (.76 / count));
+              node.ay = height * (row === 0 ? .31 : .70);
+            }
+            node.radius = radius + (i % 3 === 0 ? 4 : 0);
+            if (!node.x) { node.x = node.ax; node.y = node.ay; }
+            node.x = clamp(node.x, node.radius + 6, width - node.radius - 6);
+            node.y = clamp(node.y, node.radius + 6, height - node.radius - 6);
+          });
+        }
+
+        function resizeCanvas() {
+          const rect = wrap.getBoundingClientRect();
+          width = rect.width; height = rect.height; dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          positionNodes(); draw(0);
+        }
+
+        function selectMessage(index) {
+          selected = (index + nodes.length) % nodes.length;
+          detail.textContent = `${nodes[selected].title} ${nodes[selected].text}`;
+          label.textContent = `A community reminder · ${nodes[selected].title}`;
+          indexLabel.textContent = `Message ${selected + 1} of ${nodes.length}`;
+          draw(0);
+        }
+
+        function update(dt, time) {
+          const step = Math.min(dt, .04);
+          for (const node of nodes) {
+            const driftX = reducedMotion.matches ? 0 : Math.sin(time * .00045 + node.phase) * 5;
+            const driftY = reducedMotion.matches ? 0 : Math.cos(time * .00038 + node.phase) * 7;
+            const targetX = node.ax + driftX, targetY = node.ay + driftY;
+            node.vx += (targetX - node.x) * 1.9 * step;
+            node.vy += (targetY - node.y) * 1.9 * step;
+            if (!reducedMotion.matches && pointer.active) {
+              const dx = node.x - pointer.x, dy = node.y - pointer.y;
+              const distance = Math.hypot(dx, dy) || 1;
+              const reach = node.radius + 66;
+              if (distance < reach) {
+                const force = (reach - distance) * 1.5;
+                node.vx += dx / distance * force * step;
+                node.vy += dy / distance * force * step;
+              }
+            }
+            const damping = Math.pow(.88, step * 60);
+            node.vx *= damping; node.vy *= damping;
+            if (!reducedMotion.matches) { node.x += node.vx * step; node.y += node.vy * step; }
+            node.x = clamp(node.x, node.radius + 5, width - node.radius - 5);
+            node.y = clamp(node.y, node.radius + 5, height - node.radius - 5);
+          }
+        }
+
+        function draw(now) {
+          if (!width || !height) return;
+          const dt = lastTime ? (now - lastTime) / 1000 : 0;
+          lastTime = now;
+          update(dt, now);
+          ctx.clearRect(0, 0, width, height);
+
+          // Draw a soft halo beneath the network for visual depth.
+          const centerGlow = ctx.createRadialGradient(width * .5, height * .5, 5, width * .5, height * .5, Math.max(width, height) * .55);
+          centerGlow.addColorStop(0, 'rgba(34,211,238,.045)');
+          centerGlow.addColorStop(1, 'rgba(34,211,238,0)');
+          ctx.fillStyle = centerGlow; ctx.fillRect(0, 0, width, height);
+
+          // Curved, softly glowing links make the network feel connected without visual clutter.
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const a = nodes[i], b = nodes[j], distance = Math.hypot(a.x - b.x, a.y - b.y);
+              if (distance > width * .58) continue;
+              const related = i === selected || j === selected || i === hovered || j === hovered;
+              ctx.beginPath(); ctx.moveTo(a.x, a.y);
+              const bend = Math.min(20, distance * .055);
+              ctx.quadraticCurveTo((a.x + b.x) / 2 + bend, (a.y + b.y) / 2 - bend, b.x, b.y);
+              ctx.strokeStyle = related ? 'rgba(103,232,249,.42)' : 'rgba(96,165,250,.13)';
+              ctx.lineWidth = related ? 1.35 : .8;
+              ctx.shadowColor = related ? 'rgba(34,211,238,.45)' : 'transparent'; ctx.shadowBlur = related ? 9 : 0;
+              ctx.stroke(); ctx.shadowBlur = 0;
+            }
+          }
+
+          nodes.forEach((node, i) => {
+            const active = i === selected || i === hovered;
+            const r = node.radius + (active ? 2 : 0);
+            const color = colors[i];
+            ctx.save();
+            ctx.shadowColor = color; ctx.shadowBlur = active ? 28 : 15;
+            ctx.beginPath(); ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
+            const fill = ctx.createRadialGradient(node.x - r * .34, node.y - r * .4, 1, node.x, node.y, r * 1.2);
+            fill.addColorStop(0, '#f0fdff'); fill.addColorStop(.12, color); fill.addColorStop(1, '#102842');
+            ctx.fillStyle = fill; ctx.fill(); ctx.shadowBlur = 0;
+            ctx.lineWidth = active ? 1.6 : 1; ctx.strokeStyle = active ? 'rgba(207,250,254,.78)' : 'rgba(125,211,252,.4)'; ctx.stroke();
+            ctx.fillStyle = '#eafaff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.font = `700 ${width < 600 ? 8.5 : 9.5}px Inter, system-ui, sans-serif`;
+            const words = node.title.split(' '); let line = '', lines = [];
+            words.forEach((word) => { const candidate = line ? `${line} ${word}` : word; if (ctx.measureText(candidate).width > r * 1.45 && line) { lines.push(line); line = word; } else line = candidate; });
+            if (line) lines.push(line);
+            const titleLines = lines.slice(0, 2), lineHeight = 11;
+            titleLines.forEach((text, lineIndex) => ctx.fillText(text, node.x, node.y - 6 + (lineIndex - (titleLines.length - 1) / 2) * lineHeight, r * 1.5));
+            ctx.fillStyle = 'rgba(234,250,255,.72)'; ctx.font = `500 ${width < 600 ? 7 : 7.5}px Inter, system-ui, sans-serif`;
+            const supporting = node.text.split(' ').slice(0, 4).join(' ');
+            ctx.fillText(supporting, node.x, node.y + 10, r * 1.55);
+            ctx.restore();
+          });
+        }
+
+        function animate(now) { draw(now); frame = window.requestAnimationFrame(animate); }
+        function pointerPosition(event) { const rect = canvas.getBoundingClientRect(); pointer.x = event.clientX - rect.left; pointer.y = event.clientY - rect.top; }
+        function hitTest(x, y) {
+          let hit = -1, nearest = Infinity;
+          nodes.forEach((node, i) => { const distance = Math.hypot(node.x - x, node.y - y); if (distance < node.radius + 8 && distance < nearest) { hit = i; nearest = distance; } });
+          return hit;
+        }
+        canvas.addEventListener('pointermove', (event) => { pointerPosition(event); pointer.active = true; hovered = hitTest(pointer.x, pointer.y); canvas.style.cursor = hovered >= 0 ? 'pointer' : 'grab'; }, { passive: true });
+        canvas.addEventListener('pointerleave', () => { pointer.active = false; hovered = -1; canvas.style.cursor = 'default'; });
+        canvas.addEventListener('click', (event) => { pointerPosition(event); const hit = hitTest(pointer.x, pointer.y); if (hit >= 0) selectMessage(hit); });
+        messages.forEach((message, index) => {
+          const button = document.createElement('button'); button.type = 'button'; button.className = 'sr-only';
+          button.textContent = `${message.title} ${message.text}`; button.addEventListener('click', () => selectMessage(index));
+          document.getElementById('inspiration-options').append(button);
+        });
+        if ('ResizeObserver' in window) new ResizeObserver(resizeCanvas).observe(wrap); else window.addEventListener('resize', resizeCanvas, { passive: true });
+        resizeCanvas(); frame = window.requestAnimationFrame(animate);
+        window.addEventListener('pagehide', () => window.cancelAnimationFrame(frame), { once: true });
+      })();
+
       document.addEventListener('DOMContentLoaded', () => {
+        const message = document.getElementById('content-input');
+        const count = document.getElementById('character-count');
+        if (message && count) message.addEventListener('input', () => { count.textContent = String(message.value.length); });
         if (window.lucide) lucide.createIcons();
       });
     </script>
