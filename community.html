@@ -1,72 +1,208 @@
 <!DOCTYPE html>
-<html lang="it" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07101f">
-  <meta name="description" content="Esplora e vota le idee della community NovaNest.">
-  <title>Community | NovaNest</title>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    :root{color-scheme:dark;--bg:#07101f;--panel:#0d192b;--card:#101d31;--border:#1e3553;--cyan:#22d3ee;--blue:#38bdf8;--blue2:#3b82f6;--violet:#818cf8;--text:#ecf5ff;--muted:#9aabc2;--glow:0 0 32px rgba(34,211,238,.15);--ease:cubic-bezier(.16,1,.3,1)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;display:flex;flex-direction:column;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 50% -18%,rgba(34,211,238,.16),transparent 40%),radial-gradient(ellipse at 100% 70%,rgba(59,130,246,.11),transparent 32%),var(--bg)}
-    a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}:focus-visible{outline:2px solid rgba(34,211,238,.95);outline-offset:3px}
-    .topbar{height:64px;flex:none;position:sticky;top:0;z-index:5;border-bottom:1px solid rgba(34,211,238,.14);background:rgba(9,19,34,.78);backdrop-filter:blur(14px)}.topbar-inner,main,.footer-inner{width:min(1120px,calc(100% - 40px));margin-inline:auto}.topbar-inner{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:900;letter-spacing:-.04em}.brand-mark{width:37px;height:37px;display:grid;place-items:center;color:var(--cyan);border:1px solid rgba(34,211,238,.34);border-radius:12px;background:rgba(34,211,238,.09);box-shadow:0 0 22px rgba(34,211,238,.18);transition:transform .25s var(--ease),box-shadow .25s}.brand:hover .brand-mark{transform:scale(1.06);box-shadow:0 0 30px rgba(34,211,238,.32)}.brand-mark svg{width:20px;height:20px}.brand-name{background:linear-gradient(90deg,#fff,#a5f3fc,var(--cyan));background-clip:text;-webkit-text-fill-color:transparent}nav{display:flex;gap:28px;color:#9aabc2;font-size:12px;font-weight:600}nav a{transition:color .2s}nav a:hover,nav a[aria-current=page]{color:var(--cyan)}.cta,.submit{display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#04111f;border:1px solid rgba(165,243,252,.45);border-radius:11px;background:linear-gradient(110deg,#67e8f9,#22d3ee 45%,#60a5fa);box-shadow:0 0 24px rgba(34,211,238,.22);font-weight:800;cursor:pointer;transition:transform .25s var(--ease),filter .2s,box-shadow .2s}.cta{padding:10px 14px;font-size:11px}.cta:hover,.submit:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 0 32px rgba(34,211,238,.38)}.cta svg,.submit svg{width:14px;height:14px}
-    main{flex:1;padding:55px 0 70px;position:relative}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 11px;border:1px solid rgba(34,211,238,.27);border-radius:999px;background:rgba(34,211,238,.07);color:#67e8f9;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.eyebrow svg{width:14px;height:14px}.live-dot{height:7px;width:7px;border-radius:50%;background:#22d3ee;box-shadow:0 0 12px #22d3ee;animation:pulse 1.8s infinite}@keyframes pulse{50%{opacity:.45;box-shadow:0 0 4px #22d3ee}}.intro{max-width:690px;margin-bottom:29px}h1{margin:16px 0 11px;font-size:clamp(36px,5.5vw,58px);line-height:1.04;letter-spacing:-.055em;font-weight:900}.gradient-text{background:linear-gradient(100deg,#a5f3fc,#22d3ee 48%,#818cf8);background-clip:text;-webkit-text-fill-color:transparent}.intro p{max-width:600px;margin:0;color:#b1c2d7;font-size:13px;line-height:1.75}.layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(270px,.82fr);gap:20px;align-items:start}.card{border:1px solid rgba(106,160,205,.18);border-radius:19px;background:linear-gradient(155deg,rgba(17,34,56,.97),rgba(10,22,39,.98));box-shadow:0 16px 44px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.025);transition:border-color .25s,box-shadow .25s}.card:hover{border-color:rgba(34,211,238,.25);box-shadow:0 16px 48px rgba(0,0,0,.26),0 0 26px rgba(34,211,238,.045)}.viz-card{overflow:hidden}.viz-head{min-height:70px;padding:16px 19px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(148,163,184,.1)}.viz-title{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:750}.viz-title svg{width:17px;height:17px;color:var(--cyan);filter:drop-shadow(0 0 6px rgba(34,211,238,.55))}.viz-subtitle{margin:4px 0 0;color:#91a5bf;font-size:10px}.filter-wrap{display:flex;align-items:center;gap:8px;color:#9aabc2;font-size:10px}select{color:#dbeafe;background:#091628;border:1px solid #24415f;border-radius:9px;padding:8px 25px 8px 10px;font-size:10px}select option{background:#0d192b}.canvas-wrap{position:relative;height:438px;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,rgba(34,211,238,.07),transparent 57%),linear-gradient(rgba(120,190,230,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(120,190,230,.025) 1px,transparent 1px),#091525;background-size:auto,25px 25px,25px 25px,auto}#idea-canvas{display:block;width:100%;height:100%;touch-action:pan-y}.canvas-hint{position:absolute;left:15px;bottom:13px;display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid rgba(132,177,212,.18);border-radius:9px;background:rgba(7,16,31,.78);color:#9aabc2;font-size:9px;pointer-events:none}.canvas-hint svg{width:12px;height:12px;color:var(--cyan)}.legend{padding:12px 18px;display:flex;flex-wrap:wrap;gap:10px 17px;border-top:1px solid rgba(148,163,184,.1)}.legend-item{display:flex;align-items:center;gap:7px;color:#aabbd0;font-size:10px}.legend-dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 11px currentColor}
-    .side{display:grid;gap:15px}.detail-card{min-height:190px;padding:19px;position:relative;overflow:hidden}.detail-card:after{content:"";position:absolute;width:135px;height:135px;right:-55px;top:-62px;border-radius:50%;background:rgba(34,211,238,.08);filter:blur(3px);pointer-events:none}.detail-label{display:flex;align-items:center;gap:7px;color:#67e8f9;text-transform:uppercase;letter-spacing:.12em;font-size:9px;font-weight:800}.detail-label svg{width:13px;height:13px}.detail-title{position:relative;margin:12px 0 7px;font-size:17px;line-height:1.3;letter-spacing:-.03em}.detail-copy{margin:0;min-height:39px;color:#a8b8ce;font-size:11px;line-height:1.6}.detail-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}.author{color:#91a5bf;font-size:10px}.vote-button{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(34,211,238,.26);border-radius:9px;color:#67e8f9;background:rgba(34,211,238,.08);cursor:pointer;font-size:10px;font-weight:750;transition:transform .2s var(--ease),background .2s,box-shadow .2s}.vote-button:hover:not(:disabled){transform:translateY(-2px);background:rgba(34,211,238,.15);box-shadow:0 0 17px rgba(34,211,238,.14)}.vote-button:disabled{opacity:.48;cursor:not-allowed}.vote-button svg{width:14px;height:14px}.form-card{padding:19px}.form-card h2{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:15px}.form-card h2 svg{width:17px;height:17px;color:var(--cyan);filter:drop-shadow(0 0 5px rgba(34,211,238,.4))}.form-card>p{margin:0 0 15px;color:#9aabc2;font-size:10px}.field{margin-top:11px}label{display:block;margin-bottom:5px;color:#c0ccdc;font-size:10px;font-weight:700}input,textarea{width:100%;border:1px solid rgba(132,163,193,.2);border-radius:9px;padding:10px 11px;color:#e2e8f0;background:rgba(7,16,31,.72);font-size:10px;transition:border-color .2s,box-shadow .2s}input::placeholder,textarea::placeholder{color:#657b96}input:focus,textarea:focus{outline:none;border-color:rgba(34,211,238,.72);box-shadow:0 0 0 3px rgba(34,211,238,.09),0 0 17px rgba(34,211,238,.07)}textarea{min-height:74px;resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.submit{width:100%;margin-top:13px;padding:10px 14px;font-size:10px}.form-note{min-height:15px;margin:8px 0 0;color:#67e8f9;font-size:9px}.idea-list{margin-top:27px}.list-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.list-head h2{display:flex;align-items:center;gap:8px;margin:0;font-size:14px}.list-head h2 svg{width:16px;height:16px;color:var(--cyan)}.count{color:#9aabc2;font-size:10px}.ideas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.idea-row{display:flex;align-items:center;gap:11px;min-width:0;width:100%;padding:12px;text-align:left;color:var(--text);border:1px solid rgba(132,163,193,.16);background:linear-gradient(155deg,rgba(16,31,51,.94),rgba(10,22,39,.97));border-radius:13px;cursor:pointer;transition:transform .22s var(--ease),border-color .2s,box-shadow .2s}.idea-row:hover,.idea-row[aria-pressed=true]{transform:translateY(-2px);border-color:rgba(34,211,238,.42);box-shadow:0 8px 22px rgba(34,211,238,.08)}.idea-row[aria-pressed=true]{background:linear-gradient(155deg,rgba(17,43,64,.96),rgba(10,22,39,.98))}.idea-avatar{display:grid;flex:0 0 34px;width:34px;height:34px;place-items:center;border:1px solid rgba(255,255,255,.15);border-radius:11px;color:#04111f;font-size:11px;font-weight:850;box-shadow:0 0 16px rgba(34,211,238,.12)}.idea-row-text{min-width:0;flex:1}.idea-row-title{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;font-weight:750}.idea-row-meta{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:3px;color:#91a5bf;font-size:9px}.idea-votes{color:#9aabc2;font-size:10px;font-weight:700}
-    footer{flex:none;border-top:1px solid rgba(34,211,238,.12);background:rgba(5,11,22,.58);color:#9aabc2;font-size:10px}.footer-inner{min-height:63px;display:flex;align-items:center;justify-content:space-between;gap:15px}.footer-brand{display:flex;align-items:center;gap:7px}.footer-brand svg{width:14px;height:14px;color:#67e8f9}.footer-links{display:flex;gap:19px}.footer-links a:hover{color:var(--cyan)}
-    @media(max-width:760px){.topbar-inner,main,.footer-inner{width:min(calc(100% - 28px),600px)}nav{gap:14px}nav a:not([aria-current=page]){display:none}.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr;align-items:start}.form-card{grid-column:2;grid-row:1}.detail-card{grid-column:1;grid-row:1}.canvas-wrap{height:380px}}
-    @media(max-width:540px){main{padding:38px 0 50px}.intro{margin-bottom:22px}.intro p{font-size:12px}.side{grid-template-columns:1fr}.detail-card,.form-card{grid-column:auto;grid-row:auto}.canvas-wrap{height:330px}.viz-head{align-items:flex-start;padding:14px}.filter-wrap{flex-direction:column;align-items:flex-end;gap:3px}.filter-wrap select{max-width:150px}.legend{gap:9px 12px;padding:12px 14px}.ideas{grid-template-columns:1fr}.footer-inner{padding:14px 0;align-items:flex-start;flex-direction:column}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-  </style>
-</head>
-<body>
-  <header class="topbar"><div class="topbar-inner">
-    <a class="brand" href="./index.html" aria-label="NovaNest, pagina iniziale"><span class="brand-mark" aria-hidden="true"><i data-lucide="code-2"></i></span><span class="brand-name">NovaNest</span></a>
-    <nav aria-label="Navigazione principale"><a href="./index.html">Home</a><a href="./about.html">Chi siamo</a><a href="./tools.html">Toolkit</a><a href="./community.html" aria-current="page">Community</a></nav>
-    <a class="cta" href="#proponi"><i data-lucide="sparkles"></i> Proponi idea</a>
-  </div></header>
-  <main id="community">
-    <section class="intro" aria-labelledby="page-title"><div class="eyebrow"><i data-lucide="users"></i><span class="live-dot"></span> Community &amp; tools</div><h1 id="page-title">Le idee prendono<br><span class="gradient-text">forma insieme.</span></h1><p>Esplora ciò che la community vorrebbe costruire. Ogni bolla è un’idea: dimensione e connessioni raccontano quanto sta facendo parlare di sé.</p></section>
-    <section class="layout" aria-label="Esplora e proponi idee">
-      <div class="card viz-card"><div class="viz-head"><div><h2 class="viz-title"><i data-lucide="orbit"></i> Mappa delle idee</h2><p class="viz-subtitle">Seleziona una bolla per scoprire di più</p></div><label class="filter-wrap" for="category-filter">Filtra<select id="category-filter" aria-label="Filtra le idee per categoria"><option value="Tutte">Tutte le categorie</option><option value="Feature">Feature</option><option value="Tool">Nuovi tool</option><option value="Feedback">Feedback</option><option value="Bug">Bug report</option></select></label></div>
-        <div class="canvas-wrap" id="canvas-wrap"><canvas id="idea-canvas" role="img" aria-label="Mappa animata delle idee della community. Usa l’elenco sottostante per selezionare un’idea."></canvas><span class="canvas-hint"><i data-lucide="mouse-pointer-2"></i> Passa sulle bolle · clicca per selezionare</span></div>
-        <div class="legend" aria-label="Legenda delle categorie"><span class="legend-item"><span class="legend-dot" style="background:#22d3ee;color:#22d3ee"></span>Feature</span><span class="legend-item"><span class="legend-dot" style="background:#38bdf8;color:#38bdf8"></span>Nuovi tool</span><span class="legend-item"><span class="legend-dot" style="background:#3b82f6;color:#3b82f6"></span>Feedback</span><span class="legend-item"><span class="legend-dot" style="background:#818cf8;color:#818cf8"></span>Bug report</span></div>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NovaNest community: share ideas, feature requests, and tool suggestions together." />
+    <title>Community | NovaNest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: { 50: '#eefbff', 100: '#d9f7ff', 400: '#5eead4', 500: '#22d3ee', 600: '#0891b2', 700: '#0f766e', 900: '#123b4a' },
+              darkbg: '#07101f',
+              panel: '#0d192b',
+              cardbg: '#101d31',
+              borderbg: '#1e3553',
+              accent: '#7c3aed',
+            },
+            boxShadow: {
+              glow: '0 0 32px rgba(34, 211, 238, 0.25)',
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      :root {
+        --bg: #07101f;
+        --panel: #0d192b;
+        --card: #101d31;
+        --border: #1e3553;
+        --brand: #22d3ee;
+        --brand-strong: #0891b2;
+        --text: #ecf5ff;
+        --muted: #9aa9c1;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 32%),
+          radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.14), transparent 28%),
+          var(--bg);
+      }
+
+      .glass {
+        background: rgba(9, 18, 31, 0.78);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+
+      .soft-card {
+        background: linear-gradient(180deg, rgba(18, 31, 51, 0.95), rgba(12, 22, 37, 0.98));
+        border: 1px solid rgba(148, 163, 184, 0.16);
+        box-shadow: 0 14px 42px rgba(2, 8, 21, 0.32), 0 0 24px rgba(34, 211, 238, 0.06);
+      }
+
+      .page-shell::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 24px 24px;
+        mask-image: radial-gradient(circle at center, black, transparent 80%);
+        pointer-events: none;
+      }
+
+      .glow-ring {
+        box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2), 0 0 28px rgba(34, 211, 238, 0.12);
+      }
+
+      .comment-item {
+        animation: inUp 0.45s ease-out;
+      }
+
+      @keyframes inUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white scrollbar-thin">
+    <header class="sticky top-0 z-50 border-b border-borderbg glass">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="./index.html" class="flex items-center space-x-3 focus-ring group">
+          <div class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-xl text-brand-500 shadow-glow transition-transform duration-300 group-hover:scale-105">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+          </div>
+          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-brand-500 bg-clip-text text-transparent">NovaNest</span>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Main navigation">
+          <a href="./index.html" class="text-gray-400 hover:text-brand-500 transition-colors">Home</a>
+          <a href="./about.html" class="text-gray-400 hover:text-brand-500 transition-colors">About</a>
+          <a href="./tools.html" class="text-gray-400 hover:text-brand-500 transition-colors">Toolkit</a>
+          <a href="./community.html" class="text-brand-500 transition-colors">Community</a>
+        </nav>
+
+        <a href="#comment-form" class="focus-ring px-4 py-2 text-xs font-semibold rounded-xl bg-brand-500 hover:bg-brand-600 text-white transition-all shadow-lg hover:shadow-brand-500/20">
+          Share idea
+        </a>
       </div>
-      <aside class="side" aria-label="Dettagli e proposta">
-        <section class="card detail-card" aria-live="polite" aria-atomic="true"><div class="detail-label" id="detail-category"><i data-lucide="sparkles"></i> Idea in evidenza</div><h2 class="detail-title" id="detail-title">Scegli una bolla per iniziare</h2><p class="detail-copy" id="detail-copy">Le idee più votate diventano più grandi. La mappa si anima con delicatezza mentre esplori.</p><div class="detail-meta"><span class="author" id="detail-author">Community NovaNest</span><button type="button" class="vote-button" id="vote-button" aria-label="Vota l’idea selezionata" disabled><i data-lucide="arrow-big-up"></i><span id="vote-count">0</span> voti</button></div></section>
-        <section class="card form-card" id="proponi" aria-labelledby="form-title"><h2 id="form-title"><i data-lucide="lightbulb"></i> Suggerisci un’idea</h2><p>La prossima idea utile potrebbe essere la tua.</p><form id="idea-form"><div class="form-row"><div><label for="author-input">Nome</label><input id="author-input" name="author" maxlength="40" placeholder="es. Alex" autocomplete="name" required></div><div><label for="tag-input">Categoria</label><select id="tag-input" name="category"><option value="Feature">Feature</option><option value="Tool">Nuovi tool</option><option value="Feedback">Feedback</option><option value="Bug">Bug report</option></select></div></div><div class="field"><label for="content-input">La tua idea</label><textarea id="content-input" name="content" maxlength="180" placeholder="Cosa ti piacerebbe costruire?" required></textarea></div><button class="submit" type="submit"><i data-lucide="send"></i> Pubblica idea</button><p class="form-note" id="form-note" role="status" aria-live="polite"></p></form></section>
-      </aside>
-    </section>
-    <section class="idea-list" id="idee" aria-labelledby="list-title"><div class="list-head"><h2 id="list-title"><i data-lucide="message-square-text"></i> Idee della community</h2><span class="count" id="idea-count">0 idee</span></div><div class="ideas" id="idea-list"></div></section>
-  </main>
-  <footer><div class="footer-inner"><span class="footer-brand"><i data-lucide="code"></i> NovaNest © 2026 · Build, Share, Learn</span><div class="footer-links"><a href="./index.html">Home</a><a href="./about.html">Chi siamo</a><a href="./tools.html">Toolkit</a><a href="./community.html">Community</a></div></div></footer>
-  <script>
-    (()=>{'use strict';
-      const ideas=[
-        {id:1,title:'Snippet library condivisa',category:'Tool',text:'Una raccolta curata di snippet pronti all’uso, salvabili e organizzati per linguaggio.',author:'Marta',votes:28,x:.20,y:.28},
-        {id:2,title:'Tema ad alto contrasto',category:'Feature',text:'Un’opzione accessibile con contrasti più forti e dimensioni tipografiche personalizzabili.',author:'Luca',votes:19,x:.48,y:.20},
-        {id:3,title:'Esportazione in Markdown',category:'Feature',text:'Esporta i risultati e le configurazioni direttamente in file Markdown.',author:'Giulia',votes:14,x:.78,y:.32},
-        {id:4,title:'Ricerca tra i tool',category:'Feedback',text:'Un campo di ricerca rapido per trovare subito lo strumento giusto.',author:'Sam',votes:12,x:.32,y:.69},
-        {id:5,title:'Generatore di palette',category:'Tool',text:'Crea palette accessibili e verifica il contrasto tra colori in tempo reale.',author:'Noor',votes:22,x:.67,y:.70},
-        {id:6,title:'Segnalazione bug più chiara',category:'Bug',text:'Aggiungere un riepilogo dei passaggi e del browser alla segnalazione.',author:'Edo',votes:8,x:.88,y:.68},
-        {id:7,title:'Salva i preferiti',category:'Feature',text:'Una sezione personale per ritrovare gli strumenti usati più spesso.',author:'Ari',votes:16,x:.10,y:.72}
-      ];
-      const palette={Feature:'#22d3ee',Tool:'#38bdf8',Feedback:'#3b82f6',Bug:'#818cf8'},labels={Feature:'Feature',Tool:'Nuovi tool',Feedback:'Feedback',Bug:'Bug report'};
-      const canvas=document.getElementById('idea-canvas'),wrap=document.getElementById('canvas-wrap'),ctx=canvas.getContext('2d',{alpha:true}),filter=document.getElementById('category-filter'),reduced=matchMedia('(prefers-reduced-motion: reduce)'),pointer={x:-1000,y:-1000,active:false};
-      let width=0,height=0,dpr=1,selectedId=null,hoveredId=null,lastTime=0,frameId=0,visibleIdeas=ideas;
-      const clamp=(v,min,max)=>Math.max(min,Math.min(max,v)),radius=idea=>clamp(17+Math.sqrt(idea.votes)*3.2,24,43),isVisible=idea=>filter.value==='Tutte'||idea.category===filter.value;
-      function resize(){const rect=wrap.getBoundingClientRect();width=rect.width;height=rect.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);for(const idea of ideas){if(idea.px==null){idea.px=idea.x*width;idea.py=idea.y*height;idea.vx=idea.vy=0}else{const r=radius(idea)+8;idea.px=clamp(idea.px,r,width-r);idea.py=clamp(idea.py,r,height-r)}}draw(0)}
-      function update(dt){const step=Math.min(dt,.04),active=visibleIdeas;for(let i=0;i<active.length;i++){const a=active[i],r=radius(a);a.vx+=(a.x*width-a.px)*1.7*step;a.vy+=(a.y*height-a.py)*1.7*step;if(!reduced.matches&&pointer.active){const dx=a.px-pointer.x,dy=a.py-pointer.y,d=Math.hypot(dx,dy)||1;if(d<r+62){const force=(r+62-d)*2.1;a.vx+=dx/d*force*step;a.vy+=dy/d*force*step}}for(let j=i+1;j<active.length;j++){const b=active[j],min=r+radius(b)+12,dx=b.px-a.px,dy=b.py-a.py,d=Math.hypot(dx,dy)||1;if(d<min){const push=(min-d)*1.25*step;a.vx-=dx/d*push;a.vy-=dy/d*push;b.vx+=dx/d*push;b.vy+=dy/d*push}}const damping=Math.pow(.91,step*60);a.vx*=damping;a.vy*=damping;if(!reduced.matches){a.px+=a.vx*step;a.py+=a.vy*step}a.px=clamp(a.px,r+7,width-r-7);a.py=clamp(a.py,r+7,height-r-7)}}
-      function draw(dt){if(!width||!height)return;update(dt);ctx.clearRect(0,0,width,height);for(let i=0;i<visibleIdeas.length;i++)for(let j=i+1;j<visibleIdeas.length;j++){const a=visibleIdeas[i],b=visibleIdeas[j],d=Math.hypot(a.px-b.px,a.py-b.py);if(d<220){ctx.beginPath();ctx.moveTo(a.px,a.py);ctx.lineTo(b.px,b.py);ctx.strokeStyle=`rgba(103,232,249,${.035+(1-d/220)*.13})`;ctx.lineWidth=1;ctx.stroke()}}for(const idea of visibleIdeas){const r=radius(idea),active=idea.id===selectedId||idea.id===hoveredId,color=palette[idea.category];ctx.save();ctx.shadowColor=color;ctx.shadowBlur=active?30:17;ctx.beginPath();ctx.arc(idea.px,idea.py,r+(active?2:0),0,Math.PI*2);const gradient=ctx.createRadialGradient(idea.px-r*.35,idea.py-r*.4,2,idea.px,idea.py,r*1.25);gradient.addColorStop(0,'#e0fbff');gradient.addColorStop(.12,color);gradient.addColorStop(1,color+'bb');ctx.fillStyle=gradient;ctx.fill();ctx.shadowBlur=0;ctx.beginPath();ctx.arc(idea.px,idea.py,r-1,0,Math.PI*2);ctx.strokeStyle='rgba(219,248,255,.42)';ctx.lineWidth=1.2;ctx.stroke();ctx.fillStyle='#061322';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`750 ${r>34?11:10}px Inter,system-ui,sans-serif`;const words=idea.title.split(' '),lines=[];let line='';for(const word of words){const next=line?`${line} ${word}`:word;if(ctx.measureText(next).width>r*1.55&&line){lines.push(line);line=word}else line=next}if(line)lines.push(line);const shown=lines.slice(0,2);shown.forEach((text,index)=>ctx.fillText(text,idea.px,idea.py+(index-(shown.length-1)/2)*13,r*1.65));ctx.restore()}}
-      function animate(now){const dt=lastTime?(now-lastTime)/1000:0;lastTime=now;draw(dt);frameId=requestAnimationFrame(animate)}
-      function selectIdea(id){selectedId=id;const idea=ideas.find(item=>item.id===id);if(!idea)return;const category=document.getElementById('detail-category');category.replaceChildren();const icon=document.createElement('i');icon.setAttribute('data-lucide',idea.category==='Tool'?'wrench':idea.category==='Feature'?'sparkles':idea.category==='Bug'?'bug':'message-circle');category.append(icon,document.createTextNode(labels[idea.category]));document.getElementById('detail-title').textContent=idea.title;document.getElementById('detail-copy').textContent=idea.text;document.getElementById('detail-author').textContent=`Proposta da ${idea.author}`;document.getElementById('vote-count').textContent=idea.votes;document.getElementById('vote-button').disabled=false;renderList();draw(0);if(window.lucide)lucide.createIcons()}
-      function renderList(){visibleIdeas=ideas.filter(isVisible);const list=document.getElementById('idea-list');list.replaceChildren();for(const idea of visibleIdeas){const button=document.createElement('button');button.type='button';button.className='idea-row';button.setAttribute('aria-pressed',String(idea.id===selectedId));button.setAttribute('aria-label',`${idea.title}, ${idea.votes} voti. Seleziona idea`);const avatar=document.createElement('span');avatar.className='idea-avatar';avatar.style.background=`linear-gradient(145deg,${palette[idea.category]},${palette[idea.category]}88)`;avatar.textContent=labels[idea.category].slice(0,1);const text=document.createElement('span');text.className='idea-row-text';const title=document.createElement('span');title.className='idea-row-title';title.textContent=idea.title;const meta=document.createElement('span');meta.className='idea-row-meta';meta.textContent=`${labels[idea.category]} · ${idea.author}`;const votes=document.createElement('span');votes.className='idea-votes';votes.textContent=`↑ ${idea.votes}`;text.append(title,meta);button.append(avatar,text,votes);button.addEventListener('click',()=>selectIdea(idea.id));list.append(button)}document.getElementById('idea-count').textContent=`${visibleIdeas.length} ${visibleIdeas.length===1?'idea':'idee'}`;if(selectedId&&!visibleIdeas.some(idea=>idea.id===selectedId)){selectedId=null;const category=document.getElementById('detail-category');category.replaceChildren();const icon=document.createElement('i');icon.setAttribute('data-lucide','sparkles');category.append(icon,document.createTextNode('Idea in evidenza'));document.getElementById('detail-title').textContent='Scegli una bolla per iniziare';document.getElementById('detail-copy').textContent='Le idee più votate diventano più grandi. La mappa si anima con delicatezza mentre esplori.';document.getElementById('detail-author').textContent='Community NovaNest';document.getElementById('vote-count').textContent='0';document.getElementById('vote-button').disabled=true;if(window.lucide)lucide.createIcons()}}
-      filter.addEventListener('change',()=>{renderList();draw(0)});document.getElementById('vote-button').addEventListener('click',()=>{const idea=ideas.find(item=>item.id===selectedId);if(!idea)return;idea.votes++;document.getElementById('vote-count').textContent=idea.votes;renderList();draw(0)});
-      document.getElementById('idea-form').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;const author=document.getElementById('author-input').value.trim(),text=document.getElementById('content-input').value.trim();if(!author||!text)return;const angle=ideas.length*2.399,idea={id:Date.now(),title:text.length>42?`${text.slice(0,39)}…`:text,category:document.getElementById('tag-input').value,text,author,votes:1,x:.5+Math.cos(angle)*.31,y:.5+Math.sin(angle)*.3,px:width/2,py:height/2,vx:0,vy:0};ideas.push(idea);filter.value='Tutte';form.reset();document.getElementById('form-note').textContent='Idea aggiunta alla mappa. Grazie per il contributo!';renderList();selectIdea(idea.id)});
-      function pointerPosition(event){const rect=canvas.getBoundingClientRect();pointer.x=event.clientX-rect.left;pointer.y=event.clientY-rect.top}canvas.addEventListener('pointermove',event=>{pointerPosition(event);pointer.active=true;let found=null;for(const idea of visibleIdeas)if(Math.hypot(idea.px-pointer.x,idea.py-pointer.y)<radius(idea)+5){found=idea.id;break}hoveredId=found;canvas.style.cursor=found?'pointer':'grab'},{passive:true});canvas.addEventListener('pointerleave',()=>{pointer.active=false;hoveredId=null;canvas.style.cursor='default'});canvas.addEventListener('click',event=>{pointerPosition(event);let closest=null,distance=Infinity;for(const idea of visibleIdeas){const d=Math.hypot(idea.px-pointer.x,idea.py-pointer.y);if(d<radius(idea)+5&&d<distance){closest=idea;distance=d}}if(closest)selectIdea(closest.id)});
-      new ResizeObserver(resize).observe(wrap);renderList();resize();if(window.lucide)lucide.createIcons();frameId=requestAnimationFrame(animate);window.addEventListener('pagehide',()=>{if(frameId)cancelAnimationFrame(frameId)},{once:true});
-    })();
-  </script>
-</body>
+    </header>
+
+    <main class="flex-grow page-shell relative">
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="mb-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
+            <span class="h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+            Community & tools
+          </div>
+          <h1 class="mt-6 text-4xl md:text-6xl font-black tracking-tight text-white leading-[1.02]">
+            Build the next
+            <span class="bg-gradient-to-r from-cyan-300 via-brand-500 to-violet-400 bg-clip-text text-transparent">great idea</span>
+            together.
+          </h1>
+          <p class="mt-5 text-base text-gray-300 leading-relaxed">
+            Share your product ideas, feature requests, bug reports, and tool suggestions. The community votes on what deserves to be built next.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.8fr] gap-8">
+          <aside class="soft-card glow-ring rounded-3xl p-6 h-fit sticky top-24">
+            <div class="flex items-center gap-2 text-brand-500 mb-3">
+              <i data-lucide="lightbulb" class="w-5 h-5"></i>
+              <h2 class="text-lg font-bold text-white">Suggest an idea</h2>
+            </div>
+            <p class="text-xs text-gray-400 mb-6">Tell us what should exist next in NovaNest.</p>
+
+            <form id="comment-form" class="space-y-4" novalidate>
+              <div>
+                <label for="author-input" class="block text-xs font-medium text-gray-400 mb-1">Name / Username</label>
+                <input type="text" id="author-input" maxlength="40" placeholder="e.g. Alex" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500" />
+              </div>
+
+              <div>
+                <label for="tag-input" class="block text-xs font-medium text-gray-400 mb-1">Category</label>
+                <select id="tag-input" class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 focus:outline-none focus:border-brand-500">
+                  <option value="Feature Request">Feature Request</option>
+                  <option value="New Tool Idea">New Tool Idea</option>
+                  <option value="Bug Report">Bug Report</option>
+                  <option value="General Feedback">General Feedback</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="content-input" class="block text-xs font-medium text-gray-400 mb-1">Your idea</label>
+                <textarea id="content-input" rows="5" maxlength="500" placeholder="Describe what you’d like to build or improve..." class="w-full px-3 py-2 bg-darkbg border border-borderbg rounded-lg text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-500 resize-none"></textarea>
+              </div>
+
+              <button type="submit" class="focus-ring w-full py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-lg transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Publish idea</span>
+              </button>
+            </form>
+          </aside>
+
+          <div class="space-y-6">
+            <div class="soft-card rounded-3xl p-6">
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                  <div class="p-2 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-500">
+                    <i data-lucide="message-square-text" class="w-5 h-5"></i>
+                  </div>
+                  <h2 class="text-xl font-bold text-white">Community ideas</h2>
+                </div>
+                <span class="text-xs text-gray-400" id="comments-total-badge">0 posts</span>
+              </div>
+
+              <div id="comments-container" class="space-y-4"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-borderbg bg-darkbg/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="code" class="w-4 h-4 text-brand-400"></i>
+          <span>NovaNest © 2026</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="./index.html" class="hover:text-brand-400 transition-colors">Home</a>
+          <a href="./about.html" class="hover:text-brand-400 transition-colors">About</a>
+          <a href="./tools.html" class="hover:text-brand-400 transition-colors">Toolkit</a>
+          <a href="./community.html" class="hover:text-brand-400 transition-colors">Community</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="toast" aria-live="polite" class="fixed bottom-5 right-5 bg-brand-600 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+      <i data-lucide="check-circle" class="w-5 h-5"></i>
+      <span id="toast-message" class="text-sm font-medium">Success!</span>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.lucide) lucide.createIcons();
+      });
+    </script>
+  </body>
 </html>
